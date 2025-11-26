@@ -90,4 +90,127 @@
     </div>
   {% endif %}
 </div>
+<!-- Account Actions Card -->
+<div class="card" style="background: white; border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
+  <h3 style="font-size: 1.5rem; font-weight: 700; color: #333; margin-bottom: 1.5rem;">
+    <i class="bi bi-gear" style="color: #9ACD32;"></i> Account Actions
+  </h3>
+
+  {% if user.status == 'pending_update' %}
+    <div class="alert alert-info mb-3">
+      <i class="bi bi-clock-history"></i> <strong>Update Pending:</strong> Your profile changes are awaiting admin approval. You'll be notified within 24 hours.
+    </div>
+  {% endif %}
+
+  <div class="d-flex gap-3 flex-wrap">
+    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editProfileModal" {% if user.status == 'pending_update' %}disabled{% endif %}>
+      <i class="bi bi-pencil"></i> Edit Profile
+    </button>
+    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+      <i class="bi bi-trash"></i> Delete Account
+    </button>
+  </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="modal fade" id="editProfileModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form method="post" action="{% url 'dashboard:update_profile' %}">
+        {% csrf_token %}
+        <div class="modal-header" style="background: #FF9800; color: white;">
+          <h5 class="modal-title">
+            <i class="bi bi-pencil"></i> Edit NGO Profile
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-warning">
+            <i class="bi bi-info-circle"></i> <strong>Note:</strong> Changes will require admin approval before they are visible.
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">NGO Name</label>
+            <input type="text" name="ngo_name" class="form-control" value="{{ profile.ngo_name }}" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Emergency Contact</label>
+            <input type="text" name="emergency_contact" class="form-control" value="{{ profile.emergency_contact }}" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Location</label>
+            <textarea name="location" class="form-control" rows="2" required>{{ profile.location }}</textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">WhatsApp</label>
+            <input type="text" name="whatsapp" class="form-control" value="{{ profile.whatsapp }}">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Instagram</label>
+            <input type="text" name="instagram" class="form-control" value="{{ profile.instagram }}">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Telegram</label>
+            <input type="text" name="telegram" class="form-control" value="{{ profile.telegram }}">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Services Provided (comma-separated)</label>
+            <input type="text" name="services_provided" class="form-control" value="{{ profile.services_provided }}" required>
+            <small class="text-muted">e.g., Dog Rescue, Cat Rescue, Medical Treatment</small>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Operating Hours</label>
+            <input type="text" name="operating_hours" class="form-control" value="{{ profile.operating_hours }}">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-warning">
+            <i class="bi bi-send"></i> Submit for Approval
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Account Modal (same as individual) -->
+<div class="modal fade" id="deleteAccountModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">
+          <i class="bi bi-exclamation-triangle"></i> Delete Account?
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Are you sure you want to delete your account?</strong></p>
+        <ul class="text-danger">
+          <li>Your profile will be removed from the website</li>
+          <li>All your data will be permanently deleted</li>
+          <li>This action cannot be undone</li>
+        </ul>
+        <p class="text-muted"><small>Your account will be deleted within 24 hours after admin approval.</small></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <form method="post" action="{% url 'dashboard:request_deletion' %}" class="d-inline">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">
+            <i class="bi bi-trash"></i> Yes, Delete My Account
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}

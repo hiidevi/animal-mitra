@@ -46,6 +46,8 @@ class User(AbstractUser):
         ('pending', 'Pending Verification'),
         ('verified', 'Verified'),
         ('rejected', 'Rejected'),
+        ('pending_update', 'Pending Update Approval'),
+        ('deletion_requested', 'Deletion Requested'),
     )
     
     # Remove username, use email instead
@@ -154,3 +156,18 @@ class NGO(models.Model):
         ordering = ['-created_at']
         verbose_name = 'NGO'
         verbose_name_plural = 'NGOs'
+
+
+class PendingProfileUpdate(models.Model):
+    """
+    Store pending profile changes awaiting admin approval
+    """
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='pending_update')
+    data = models.JSONField()  # Store all changed fields as JSON
+    requested_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Pending update for {self.user.email}"
+    
+    class Meta:
+        ordering = ['-requested_at']

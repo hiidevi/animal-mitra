@@ -109,6 +109,12 @@ body {
   border: 1px solid #CE93D8;
 }
 
+.badge-warning {
+  background: #FFF3E0;
+  color: #E65100;
+  border: 1px solid #FFB74D;
+}
+
 /* contact row */
 .contact-row {
   display: flex;
@@ -341,6 +347,16 @@ body {
       </button>
     </li>
     <li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#updates" type="button">
+        <i class="bi bi-pencil-square"></i> Updates ({{ pending_updates_count }})
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#deletions" type="button">
+        <i class="bi bi-trash"></i> Deletions ({{ deletion_requests_count }})
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
       <button class="nav-link" data-bs-toggle="tab" data-bs-target="#verified" type="button">
         <i class="bi bi-check-circle"></i> Verified ({{ verified_count }})
       </button>
@@ -369,6 +385,167 @@ body {
           <i class="bi bi-check-circle" style="font-size: 4rem; color: var(--primary-green);"></i>
           <h4 class="mt-3">All Clear!</h4>
           <p class="text-muted">No pending registrations.</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- PENDING UPDATES TAB -->
+    <div class="tab-pane fade" id="updates">
+      {% if pending_updates %}
+        <div class="alert alert-warning my-4">
+          <i class="bi bi-pencil-square"></i> <strong>{{ pending_updates_count }} profile update(s)</strong> awaiting review
+        </div>
+        <div class="row g-4">
+          {% for user in pending_updates %}
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="list-card">
+                <div class="card-head">
+                  <h5>
+                    {% if user.user_type == 'individual' %}
+                      {{ user.individual_profile.full_name }}
+                    {% else %}
+                      {{ user.ngo_profile.ngo_name }}
+                    {% endif %}
+                  </h5>
+                  <span class="badge-status badge-warning">
+                    <i class="bi bi-pencil"></i> Update
+                  </span>
+                </div>
+
+                <div class="small-muted">
+                  <i class="bi bi-envelope"></i> {{ user.email }}
+                </div>
+
+                <div class="mt-2 small text-muted">
+                  <i class="bi bi-clock"></i> {{ user.pending_update.requested_at|date:"M d, h:i A" }}
+                </div>
+
+                <!-- View Changes Button -->
+                <button class="btn-view-details w-100" data-bs-toggle="modal" data-bs-target="#viewChangesModal{{ user.id }}">
+                  <i class="bi bi-eye"></i> View Changes
+                </button>
+
+                <!-- Action Buttons -->
+                <div class="mt-2 d-flex gap-2">
+                  <form method="post" action="{% url 'admin_panel:approve_update' user.id %}" class="flex-fill">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-approve w-100">
+                      <i class="bi bi-check"></i> Approve
+                    </button>
+                  </form>
+                  <form method="post" action="{% url 'admin_panel:reject_update' user.id %}" class="flex-fill">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-reject w-100">
+                      <i class="bi bi-x"></i> Reject
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- View Changes Modal -->
+            <div class="modal fade" id="viewChangesModal{{ user.id }}" tabindex="-1">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header" style="background: #FF9800; color: white;">
+                    <h5 class="modal-title">
+                      <i class="bi bi-pencil"></i> Pending Changes
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                  </div>
+                  <div class="modal-body">
+                    <h6 class="fw-bold mb-3">Requested Changes:</h6>
+                    <table class="table">
+                      <tbody>
+                        {% for key, value in user.pending_update.data.items %}
+                          <tr>
+                            <td class="fw-bold">{{ key|title }}</td>
+                            <td>{{ value }}</td>
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer">
+                    <form method="post" action="{% url 'admin_panel:approve_update' user.id %}" class="d-inline">
+                      {% csrf_token %}
+                      <button type="submit" class="btn-approve">Approve</button>
+                    </form>
+                    <form method="post" action="{% url 'admin_panel:reject_update' user.id %}" class="d-inline">
+                      {% csrf_token %}
+                      <button type="submit" class="btn-reject">Reject</button>
+                    </form>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="text-center py-5">
+          <i class="bi bi-check-circle" style="font-size: 4rem; color: var(--primary-green);"></i>
+          <h4 class="mt-3">No Pending Updates</h4>
+          <p class="text-muted">All profile updates have been reviewed.</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- DELETION REQUESTS TAB -->
+    <div class="tab-pane fade" id="deletions">
+      {% if deletion_requests %}
+        <div class="alert alert-danger my-4">
+          <i class="bi bi-exclamation-triangle"></i> <strong>{{ deletion_requests_count }} deletion request(s)</strong> awaiting action
+        </div>
+        <div class="row g-4">
+          {% for user in deletion_requests %}
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="list-card">
+                <div class="card-head">
+                  <h5>
+                    {% if user.user_type == 'individual' %}
+                      {{ user.individual_profile.full_name }}
+                    {% else %}
+                      {{ user.ngo_profile.ngo_name }}
+                    {% endif %}
+                  </h5>
+                  <span class="badge-status" style="background: #FFEBEE; color: #C62828; border: 1px solid #EF9A9A;">
+                    <i class="bi bi-trash"></i> Delete
+                  </span>
+                </div>
+
+                <div class="small-muted">
+                  <i class="bi bi-envelope"></i> {{ user.email }}
+                </div>
+
+                <div class="alert alert-warning mt-2 small mb-2">
+                  <i class="bi bi-exclamation-triangle"></i> User requested permanent deletion
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-flex gap-2">
+                  <form method="post" action="{% url 'admin_panel:approve_deletion' user.id %}" class="flex-fill" onsubmit="return confirm('Permanently delete? Cannot be undone!');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-delete w-100">
+                      <i class="bi bi-trash"></i> Delete
+                    </button>
+                  </form>
+                  <form method="post" action="{% url 'admin_panel:cancel_deletion' user.id %}" class="flex-fill">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-approve w-100">
+                      <i class="bi bi-arrow-counterclockwise"></i> Cancel
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="text-center py-5">
+          <i class="bi bi-check-circle" style="font-size: 4rem; color: var(--primary-green);"></i>
+          <h4 class="mt-3">No Deletion Requests</h4>
+          <p class="text-muted">All users are active.</p>
         </div>
       {% endif %}
     </div>
