@@ -112,12 +112,25 @@ LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'listings:home'
 LOGOUT_REDIRECT_URL = 'listings:home'
 
-# Email configuration (for sending approval emails later)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development
-# For production, use SMTP:
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'your-email@gmail.com'
-# EMAIL_HOST_PASSWORD = 'your-app-password'
+# =============================================
+# EMAIL CONFIGURATION
+# =============================================
+
+# FOR TESTING (prints in console)
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+from decouple import config
+
+# Email Configuration (SAFE - uses environment variables)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')  # ← Reads from .env
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # ← Reads from .env
+DEFAULT_FROM_EMAIL = f'Animal Mitra <{EMAIL_HOST_USER}>'
+
+# Also update SECRET_KEY and DEBUG
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+

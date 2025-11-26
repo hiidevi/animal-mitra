@@ -1,0 +1,90 @@
+<div class="modal fade" id="editModal{{ user.id }}" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form method="post" action="{% url 'admin_panel:edit_user' user.id %}">
+        {% csrf_token %}
+        <div class="modal-header" style="background: #FF9800; color: white;">
+          <h5 class="modal-title">
+            <i class="bi bi-pencil"></i> Edit User Information
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          {% if user.user_type == 'individual' %}
+            <div class="mb-3">
+              <label class="form-label">Full Name</label>
+              <input type="text" name="full_name" class="form-control" value="{{ user.individual_profile.full_name }}" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Mobile</label>
+              <input type="text" name="mobile" class="form-control" value="{{ user.individual_profile.mobile }}" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Location</label>
+              <input type="text" name="location" class="form-control" value="{{ user.individual_profile.location }}" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">WhatsApp</label>
+              <input type="text" name="whatsapp" class="form-control" value="{{ user.individual_profile.whatsapp }}">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Instagram</label>
+              <input type="text" name="instagram" class="form-control" value="{{ user.individual_profile.instagram }}">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Animals Helped (comma-separated)</label>
+              <input type="text" name="animals_helped" class="form-control" value="{{ user.individual_profile.animals_helped }}" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">About</label>
+              <textarea name="about" class="form-control" rows="3" required>{{ user.individual_profile.about }}</textarea>
+            </div>
+          {% else %}
+            <div class="mb-3">
+              <label class="form-label">NGO Name</label>
+              <input type="text" name="ngo_name" class="form-control" value="{{ user.ngo_profile.ngo_name }}" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" name="email" class="form-control" value="{{ user.ngo_profile.email }}" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Emergency Contact</label>
+              <input type="text" name="emergency_contact" class="form-control" value="{{ user.ngo_profile.emergency_contact }}" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Location</label>
+              <textarea name="location" class="form-control" rows="2" required>{{ user.ngo_profile.location }}</textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">WhatsApp</label>
+              <input type="text" name="whatsapp" class="form-control" value="{{ user.ngo_profile.whatsapp }}">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Instagram</label>
+              <input type="text" name="instagram" class="form-control" value="{{ user.ngo_profile.instagram }}">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Telegram</label>
+              <input type="text" name="telegram" class="form-control" value="{{ user.ngo_profile.telegram }}">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Services Provided (comma-separated)</label>
+              <input type="text" name="services_provided" class="form-control" value="{{ user.ngo_profile.services_provided }}" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Operating Hours</label>
+              <input type="text" name="operating_hours" class="form-control" value="{{ user.ngo_profile.operating_hours }}">
+            </div>
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn-edit">
+            <i class="bi bi-save"></i> Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

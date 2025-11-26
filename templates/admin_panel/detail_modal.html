@@ -1,0 +1,92 @@
+<div class="modal fade" id="detailModal{{ user.id }}" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="background: var(--primary-green); color: white;">
+        <h5 class="modal-title">
+          {% if user.user_type == 'individual' %}
+            {{ user.individual_profile.full_name }}
+          {% else %}
+            {{ user.ngo_profile.ngo_name }}
+          {% endif %}
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <dl>
+          <dt>Type</dt>
+          <dd><span class="badge-status {% if user.user_type == 'individual' %}badge-individual{% else %}badge-ngo{% endif %}">
+            {{ user.get_user_type_display }}
+          </span></dd>
+
+          <dt>Status</dt>
+          <dd><span class="badge-status badge-{{ user.status }}">{{ user.get_status_display }}</span></dd>
+
+          <dt>Email</dt>
+          <dd>{{ user.email }}</dd>
+
+          {% if user.user_type == 'individual' %}
+            <dt>Mobile</dt>
+            <dd>{{ user.individual_profile.mobile }}</dd>
+
+            <dt>Location</dt>
+            <dd>{{ user.individual_profile.location }}</dd>
+
+            <dt>WhatsApp</dt>
+            <dd>{{ user.individual_profile.whatsapp|default:"Not provided" }}</dd>
+
+            <dt>Instagram</dt>
+            <dd>{{ user.individual_profile.instagram|default:"Not provided" }}</dd>
+
+            <dt>Animals Helped</dt>
+            <dd>
+              {% for animal in user.individual_profile.get_animals_list %}
+                <span class="tag">{{ animal }}</span>
+              {% endfor %}
+            </dd>
+
+            <dt>About</dt>
+            <dd>{{ user.individual_profile.about }}</dd>
+          {% else %}
+            <dt>Emergency Contact</dt>
+            <dd>{{ user.ngo_profile.emergency_contact }}</dd>
+
+            <dt>Location</dt>
+            <dd>{{ user.ngo_profile.location }}</dd>
+
+            <dt>WhatsApp</dt>
+            <dd>{{ user.ngo_profile.whatsapp|default:"Not provided" }}</dd>
+
+            <dt>Instagram</dt>
+            <dd>{{ user.ngo_profile.instagram|default:"Not provided" }}</dd>
+
+            <dt>Telegram</dt>
+            <dd>{{ user.ngo_profile.telegram|default:"Not provided" }}</dd>
+
+            <dt>Services Provided</dt>
+            <dd>
+              {% for service in user.ngo_profile.get_services_list %}
+                <span class="tag">{{ service }}</span>
+              {% endfor %}
+            </dd>
+
+            <dt>Operating Hours</dt>
+            <dd>{{ user.ngo_profile.operating_hours|default:"Not specified" }}</dd>
+
+            {% if user.ngo_profile.certificate %}
+              <dt>Certificate</dt>
+              <dd><a href="{{ user.ngo_profile.certificate.url }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                <i class="bi bi-file-earmark-pdf"></i> View Certificate
+              </a></dd>
+            {% endif %}
+          {% endif %}
+
+          <dt>Registered On</dt>
+          <dd>{{ user.created_at|date:"F d, Y - h:i A" }}</dd>
+        </dl>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
