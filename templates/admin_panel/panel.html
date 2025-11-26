@@ -5,124 +5,465 @@
 
 {% block extra_css %}
 <style>
-    .admin-container { max-width: 1400px; margin: 2rem auto; padding: 0 1.5rem; }
-    .admin-header { background: white; padding: 2rem; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
-    .admin-header h1 { font-size: 2.5rem; font-weight: 800; color: #9ACD32; margin-bottom: 0.5rem; }
-    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-    .stat-box { background: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); border-left: 5px solid #9ACD32; }
-    .stat-number { font-size: 2.5rem; font-weight: 800; color: #333; }
-    .stat-label { color: #666; font-size: 0.95rem; margin-top: 0.5rem; }
-    .card { background: white; border-radius: 15px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
-    .card-title { font-size: 1.5rem; font-weight: 700; color: #333; margin-bottom: 1.5rem; }
-    .registration-item { background: #f9f9f9; border: 2px solid #e0e0e0; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
-    .btn-approve { background: #28a745; color: white; padding: 0.6rem 1.5rem; border-radius: 8px; border: none; font-weight: 600; margin: 0.3rem; cursor: pointer; }
-    .btn-reject { background: #dc3545; color: white; padding: 0.6rem 1.5rem; border-radius: 8px; border: none; font-weight: 600; margin: 0.3rem; cursor: pointer; }
+:root {
+  --primary-green: #9ACD32;
+  --light-green: #C8E66C;
+  --dark-green: #7BAF2E;
+  --accent-yellow: #ADFF2F;
+  --card-radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f7faf6;
+  color: #222;
+}
+
+/* Card styles */
+.list-card {
+  background: #fff;
+  border-radius: var(--card-radius);
+  padding: 1.2rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transition: transform .18s ease, box-shadow .18s ease;
+  height: 100%;
+}
+
+.list-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card-head h5 {
+  margin: 0;
+  font-weight: 700;
+  color: var(--primary-green);
+  font-size: 1.05rem;
+}
+
+.badge-status {
+  padding: .35rem .75rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: .82rem;
+}
+
+.badge-pending {
+  background: #FFF4E5;
+  color: #A66B00;
+  border: 1px solid #FFE0A8;
+}
+
+.badge-verified {
+  background: #E9FFEB;
+  color: #0A7C2E;
+  border: 1px solid #B8F0BC;
+}
+
+.badge-individual {
+  background: #E3F2FD;
+  color: #1565C0;
+  border: 1px solid #90CAF9;
+}
+
+.badge-ngo {
+  background: #F3E5F5;
+  color: #7B1FA2;
+  border: 1px solid #CE93D8;
+}
+
+/* contact row */
+.contact-row {
+  display: flex;
+  gap: .6rem;
+  align-items: center;
+  margin-top: .8rem;
+  flex-wrap: wrap;
+}
+
+.contact-row a {
+  text-decoration: none;
+  color: #444;
+  background: #f6f9f6;
+  padding: .45rem .7rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: .85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  border: 1px solid #eef3ea;
+  transition: all .2s ease;
+}
+
+.contact-row a:hover {
+  background: linear-gradient(90deg, var(--light-green), var(--accent-yellow));
+  color: #fff;
+  border-color: transparent;
+  transform: translateY(-2px);
+}
+
+/* animals/services tags */
+.tag {
+  display: inline-block;
+  background: #f1fbec;
+  color: #2f6f2f;
+  padding: .3rem .6rem;
+  border-radius: 8px;
+  margin-right: .4rem;
+  margin-top: .4rem;
+  font-weight: 600;
+  font-size: .85rem;
+}
+
+.small-muted {
+  font-size: .86rem;
+  color: #666;
+  margin-top: .5rem;
+}
+
+/* Action buttons */
+.btn-approve {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: .5rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all .2s ease;
+}
+
+.btn-approve:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+.btn-reject {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: .5rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all .2s ease;
+}
+
+.btn-reject:hover {
+  background: #da190b;
+  transform: translateY(-2px);
+}
+
+.btn-view-details {
+  background: #2196F3;
+  color: white;
+  border: none;
+  padding: .5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: .9rem;
+  margin-top: .8rem;
+  transition: all .2s ease;
+}
+
+.btn-view-details:hover {
+  background: #0b7dda;
+}
+
+/* Stats cards */
+.stat-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transition: transform .2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary-green);
+}
+
+.stat-label {
+  color: #666;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+/* Modal tweaks */
+.modal-body dl dt {
+  font-weight: 700;
+  color: #333;
+  margin-top: .8rem;
+}
+
+.modal-body dl dd {
+  margin-bottom: .6rem;
+  color: #444;
+}
+
+@media (max-width:768px) {
+  .card-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .6rem;
+  }
+}
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="admin-container">
-    <div class="admin-header">
-        <h1>Admin Dashboard</h1>
-        <p>Manage all registrations, approvals, and platform analytics</p>
+<div class="container my-5">
+  <!-- Header -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <h2 class="fw-bold" style="color: var(--dark-green);">
+        <i class="bi bi-shield-check"></i> Admin Panel
+      </h2>
+      <p class="text-muted">Review and approve pending registrations</p>
+    </div>
+  </div>
+
+  <!-- Statistics Row -->
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <div class="stat-card">
+        <div class="stat-number">{{ total_users }}</div>
+        <div class="stat-label">Total Users</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="stat-card">
+        <div class="stat-number">{{ pending_count }}</div>
+        <div class="stat-label">Pending</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="stat-card">
+        <div class="stat-number">{{ verified_count }}</div>
+        <div class="stat-label">Verified</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="stat-card">
+        <div class="stat-number">{{ rejected_count }}</div>
+        <div class="stat-label">Rejected</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pending Registrations -->
+  {% if pending_users %}
+    <div class="alert alert-info mb-4">
+      <i class="bi bi-info-circle"></i> <strong>{{ pending_count }} registration(s)</strong> awaiting your review
     </div>
 
-    <!-- Quick Stats -->
-    <div class="stats-row">
-        <div class="stat-box">
-            <div class="stat-number">{{ stats.pending_count }}</div>
-            <div class="stat-label"><i class="bi bi-clock-history"></i> Pending Approvals</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-number">{{ stats.verified_count }}</div>
-            <div class="stat-label"><i class="bi bi-check-circle"></i> Approved Listings</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-number">{{ stats.total_count }}</div>
-            <div class="stat-label"><i class="bi bi-people"></i> Total Registrations</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-number">{{ stats.total_views }}</div>
-            <div class="stat-label"><i class="bi bi-eye"></i> Total Views</div>
-        </div>
-    </div>
-
-    <!-- Pending Registrations -->
-    <div class="card">
-        <h3 class="card-title"><i class="bi bi-clock-history"></i> Pending Registrations</h3>
-        
-        {% for item in pending_list %}
-        <div class="registration-item">
-            <h4 style="font-size: 1.3rem; font-weight: 700; color: #333;">
-                {% if item.type == 'individual' %}
-                    {{ item.profile.full_name }}
-                    <span style="background: #9ACD32; color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; margin-left: 0.8rem;">📋 Individual</span>
+    <h3 class="mb-3 fw-bold" style="color: var(--dark-green);">Pending Registrations</h3>
+    <div class="row g-4" id="listGrid">
+      {% for user in pending_users %}
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="list-card">
+            <!-- Card Header -->
+            <div class="card-head">
+              <h5>
+                {% if user.user_type == 'individual' %}
+                  {{ user.individual_profile.full_name }}
                 {% else %}
-                    {{ item.profile.ngo_name }}
-                    <span style="background: #007bff; color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; margin-left: 0.8rem;">🏢 NGO</span>
+                  {{ user.ngo_profile.ngo_name }}
                 {% endif %}
-            </h4>
-            
-            <div style="margin: 0.5rem 0;"><strong>Email:</strong> {{ item.user.email }}</div>
-            {% if item.type == 'individual' %}
-                <div><strong>Mobile:</strong> {{ item.profile.mobile }}</div>
-                <div><strong>Location:</strong> {{ item.profile.location }}</div>
-            {% else %}
-                <div><strong>Emergency:</strong> {{ item.profile.emergency_contact }}</div>
-                <div><strong>Location:</strong> {{ item.profile.location }}</div>
-                {% if item.profile.certificate %}
-                <div><strong>Certificate:</strong> <a href="{{ item.profile.certificate.url }}" target="_blank">View PDF</a></div>
-                {% endif %}
-            {% endif %}
-            
-            <div style="color: #999; font-size: 0.9rem; margin-top: 1rem;">
-                <i class="bi bi-clock"></i> Registered: {{ item.user.created_at|timesince }} ago
+              </h5>
+              <div>
+                <span class="badge-status {% if user.user_type == 'individual' %}badge-individual{% else %}badge-ngo{% endif %}">
+                  {{ user.get_user_type_display }}
+                </span>
+              </div>
             </div>
-            
-            <div style="margin-top: 1rem;">
-                <a href="{% url 'admin_panel:approve' item.user.id %}" class="btn-approve">
-                    <i class="bi bi-check-circle"></i> Approve
-                </a>
-                <a href="{% url 'admin_panel:reject' item.user.id %}" class="btn-reject" onclick="return confirm('Reject this registration?')">
-                    <i class="bi bi-x-circle"></i> Reject
-                </a>
-            </div>
-        </div>
-        {% empty %}
-        <p>No pending registrations!</p>
-        {% endfor %}
-    </div>
 
-    <!-- Approved Listings -->
-    <div class="card">
-        <h3 class="card-title"><i class="bi bi-check-circle"></i> Approved Listings</h3>
-        
-        {% for item in verified_list %}
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid #e0e0e0;">
-            <div>
-                <h4 style="font-size: 1.1rem; font-weight: 600; color: #333; margin-bottom: 0.3rem;">
-                    {% if item.type == 'individual' %}
-                        {{ item.profile.full_name }}
-                    {% else %}
-                        {{ item.profile.ngo_name }}
-                    {% endif %}
-                    <span style="background: #28a745; color: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; margin-left: 0.5rem;">✓ Verified</span>
-                </h4>
-                <div style="color: #666; font-size: 0.9rem;">
-                    {% if item.type == 'individual' %}
-                        📋 Individual | {{ item.profile.location }} | Member since: {{ item.user.created_at|date:"M Y" }}
-                    {% else %}
-                        🏢 NGO | {{ item.profile.location }} | Member since: {{ item.user.created_at|date:"M Y" }}
-                    {% endif %}
-                </div>
+            <!-- Location -->
+            <div class="small-muted">
+              <i class="bi bi-geo-alt-fill" style="color: var(--primary-green);"></i>
+              {% if user.user_type == 'individual' %}
+                {{ user.individual_profile.location }}
+              {% else %}
+                {{ user.ngo_profile.location|truncatewords:5 }}
+              {% endif %}
             </div>
-            <div>
-                <a href="{% url 'admin_panel:deactivate' item.user.id %}" class="btn-reject" onclick="return confirm('Deactivate this user?')">Deactivate</a>
+
+            <!-- Contact Info -->
+            <div class="contact-row">
+              <a href="tel:{% if user.user_type == 'individual' %}{{ user.individual_profile.mobile }}{% else %}{{ user.ngo_profile.emergency_contact }}{% endif %}">
+                <i class="bi bi-telephone-fill"></i>
+                {% if user.user_type == 'individual' %}
+                  {{ user.individual_profile.mobile }}
+                {% else %}
+                  {{ user.ngo_profile.emergency_contact }}
+                {% endif %}
+              </a>
             </div>
+
+            <!-- Animals/Services Tags -->
+            <div class="mt-2">
+              {% if user.user_type == 'individual' %}
+                {% for animal in user.individual_profile.get_animals_list %}
+                  <span class="tag">{{ animal }}</span>
+                {% endfor %}
+              {% else %}
+                {% for service in user.ngo_profile.get_services_list|slice:":3" %}
+                  <span class="tag">{{ service }}</span>
+                {% endfor %}
+              {% endif %}
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-3 d-flex gap-2">
+              <form method="post" action="{% url 'admin_panel:approve_user' user.id %}" class="flex-fill">
+                {% csrf_token %}
+                <button type="submit" class="btn-approve w-100">
+                  <i class="bi bi-check-circle"></i> Approve
+                </button>
+              </form>
+              <form method="post" action="{% url 'admin_panel:reject_user' user.id %}" class="flex-fill">
+                {% csrf_token %}
+                <button type="submit" class="btn-reject w-100">
+                  <i class="bi bi-x-circle"></i> Reject
+                </button>
+              </form>
+            </div>
+
+            <!-- View Details Button -->
+            <button class="btn-view-details w-100" data-bs-toggle="modal" data-bs-target="#detailModal{{ user.id }}">
+              <i class="bi bi-eye"></i> View Full Details
+            </button>
+          </div>
         </div>
-        {% empty %}
-        <p>No approved listings yet!</p>
-        {% endfor %}
+
+        <!-- Detail Modal for Each User -->
+        <div class="modal fade" id="detailModal{{ user.id }}" tabindex="-1">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header" style="background: var(--primary-green); color: white;">
+                <h5 class="modal-title">
+                  {% if user.user_type == 'individual' %}
+                    {{ user.individual_profile.full_name }}
+                  {% else %}
+                    {{ user.ngo_profile.ngo_name }}
+                  {% endif %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <dl>
+                  <dt>Type</dt>
+                  <dd><span class="badge-status {% if user.user_type == 'individual' %}badge-individual{% else %}badge-ngo{% endif %}">
+                    {{ user.get_user_type_display }}
+                  </span></dd>
+
+                  <dt>Email</dt>
+                  <dd>{{ user.email }}</dd>
+
+                  {% if user.user_type == 'individual' %}
+                    <dt>Mobile</dt>
+                    <dd>{{ user.individual_profile.mobile }}</dd>
+
+                    <dt>Location</dt>
+                    <dd>{{ user.individual_profile.location }}</dd>
+
+                    <dt>WhatsApp</dt>
+                    <dd>{{ user.individual_profile.whatsapp|default:"Not provided" }}</dd>
+
+                    <dt>Instagram</dt>
+                    <dd>{{ user.individual_profile.instagram|default:"Not provided" }}</dd>
+
+                    <dt>Animals Helped</dt>
+                    <dd>
+                      {% for animal in user.individual_profile.get_animals_list %}
+                        <span class="tag">{{ animal }}</span>
+                      {% endfor %}
+                    </dd>
+
+                    <dt>About</dt>
+                    <dd>{{ user.individual_profile.about }}</dd>
+                  {% else %}
+                    <dt>Emergency Contact</dt>
+                    <dd>{{ user.ngo_profile.emergency_contact }}</dd>
+
+                    <dt>Location</dt>
+                    <dd>{{ user.ngo_profile.location }}</dd>
+
+                    <dt>WhatsApp</dt>
+                    <dd>{{ user.ngo_profile.whatsapp|default:"Not provided" }}</dd>
+
+                    <dt>Instagram</dt>
+                    <dd>{{ user.ngo_profile.instagram|default:"Not provided" }}</dd>
+
+                    <dt>Telegram</dt>
+                    <dd>{{ user.ngo_profile.telegram|default:"Not provided" }}</dd>
+
+                    <dt>Services Provided</dt>
+                    <dd>
+                      {% for service in user.ngo_profile.get_services_list %}
+                        <span class="tag">{{ service }}</span>
+                      {% endfor %}
+                    </dd>
+
+                    <dt>Operating Hours</dt>
+                    <dd>{{ user.ngo_profile.operating_hours|default:"Not specified" }}</dd>
+
+                    {% if user.ngo_profile.certificate %}
+                      <dt>Certificate</dt>
+                      <dd><a href="{{ user.ngo_profile.certificate.url }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                        <i class="bi bi-file-earmark-pdf"></i> View Certificate
+                      </a></dd>
+                    {% endif %}
+                  {% endif %}
+
+                  <dt>Registered On</dt>
+                  <dd>{{ user.created_at|date:"F d, Y - h:i A" }}</dd>
+                </dl>
+              </div>
+              <div class="modal-footer">
+                <form method="post" action="{% url 'admin_panel:approve_user' user.id %}" class="d-inline">
+                  {% csrf_token %}
+                  <button type="submit" class="btn-approve">
+                    <i class="bi bi-check-circle"></i> Approve
+                  </button>
+                </form>
+                <form method="post" action="{% url 'admin_panel:reject_user' user.id %}" class="d-inline">
+                  {% csrf_token %}
+                  <button type="submit" class="btn-reject">
+                    <i class="bi bi-x-circle"></i> Reject
+                  </button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
+  {% else %}
+    <div class="text-center py-5" id="emptyState">
+      <i class="bi bi-check-circle" style="font-size: 4rem; color: var(--primary-green);"></i>
+      <h4 class="mt-3">All Clear!</h4>
+      <p class="text-muted">No pending registrations at the moment.</p>
+    </div>
+  {% endif %}
 </div>
 {% endblock %}
