@@ -1,0 +1,519 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Register - Animal Mitra{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --primary-green: #9ACD32;
+        --light-green: #C8E66C;
+        --dark-green: #7BAF2E;
+        --accent-yellow: #ADFF2F;
+    }
+    
+    body {
+        background: #f8f9fa;
+    }
+    
+    .split-container {
+        display: flex;
+        min-height: calc(100vh - 70px);
+    }
+    
+    .image-side {
+        flex: 1;
+        background: linear-gradient(135deg, rgba(154, 205, 50, 0.9), rgba(173, 255, 47, 0.8)), 
+                    url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=800&q=80') center/cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 3rem;
+        color: white;
+        position: relative;
+    }
+    
+    .image-side::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+    
+    .image-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+    }
+    
+    .image-side h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .image-side p {
+        font-size: 1.3rem;
+        font-weight: 400;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    
+    .form-side {
+        flex: 1;
+        background: white;
+        padding: 3rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .form-container {
+        max-width: 500px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    
+    .logo-section {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    .logo-section h2 {
+        color: var(--primary-green);
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+    }
+    
+    .logo-section p {
+        color: #666;
+        font-size: 1.1rem;
+    }
+    
+    .registration-tabs {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .tab-btn {
+        flex: 1;
+        padding: 1rem;
+        border: 2px solid var(--primary-green);
+        background: white;
+        color: var(--primary-green);
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .tab-btn:hover {
+        background: var(--light-green);
+        border-color: var(--dark-green);
+    }
+    
+    .tab-btn.active {
+        background: var(--primary-green);
+        color: white;
+    }
+    
+    .tab-btn i {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+    
+    .form-content {
+        display: none;
+    }
+    
+    .form-content.active {
+        display: block;
+    }
+    
+    .form-label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+    }
+    
+    .form-control, .form-select {
+        padding: 0.9rem 1rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        border-color: var(--primary-green);
+        box-shadow: 0 0 0 0.2rem rgba(154, 205, 50, 0.25);
+    }
+    
+    textarea.form-control {
+        resize: vertical;
+        min-height: 100px;
+    }
+    
+    .password-wrapper {
+        position: relative;
+    }
+    
+    .password-toggle {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #999;
+        font-size: 1.2rem;
+    }
+    
+    .password-toggle:hover {
+        color: var(--primary-green);
+    }
+    
+    .submit-btn {
+        width: 100%;
+        padding: 1.1rem;
+        background: linear-gradient(135deg, var(--primary-green), var(--accent-yellow));
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 1.5rem;
+    }
+    
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(154, 205, 50, 0.4);
+    }
+    
+    .login-link {
+        text-align: center;
+        margin-top: 1.5rem;
+        color: #666;
+    }
+    
+    .login-link a {
+        color: var(--primary-green);
+        font-weight: 600;
+        text-decoration: none;
+    }
+    
+    .login-link a:hover {
+        text-decoration: underline;
+    }
+    
+    .checkbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+    
+    .checkbox-item {
+        flex: 0 0 calc(50% - 0.4rem);
+    }
+    
+    .checkbox-item input[type="checkbox"] {
+        margin-right: 0.5rem;
+    }
+    
+    .errorlist {
+        list-style: none;
+        padding: 0;
+        margin: 0.5rem 0;
+        color: #dc3545;
+        font-size: 0.9rem;
+    }
+    
+    @media (max-width: 992px) {
+        .split-container {
+            flex-direction: column;
+        }
+        
+        .image-side {
+            min-height: 300px;
+        }
+        
+        .image-side h1 {
+            font-size: 2.5rem;
+        }
+        
+        .form-side {
+            padding: 2rem 1.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="split-container">
+    <!-- Left Side - Image -->
+    <div class="image-side">
+        <div class="image-content">
+            <h1>🐾 Join Us!</h1>
+            <p>Help us make Faridabad a better place for animals</p>
+        </div>
+    </div>
+    
+    <!-- Right Side - Form -->
+    <div class="form-side">
+        <div class="form-container">
+            <div class="logo-section">
+                <h2>🐾 Animal Mitra</h2>
+                <p>Register to help animals in need</p>
+            </div>
+            
+            <!-- Registration Type Tabs -->
+            <div class="registration-tabs">
+                <button class="tab-btn active" id="individualTab" onclick="switchTab('individual')">
+                    <i class="bi bi-person-heart"></i>
+                    Individual Helper
+                </button>
+                <button class="tab-btn" id="ngoTab" onclick="switchTab('ngo')">
+                    <i class="bi bi-building-check"></i>
+                    NGO
+                </button>
+            </div>
+            
+            <!-- Individual Helper Form -->
+            <div class="form-content active" id="individualForm">
+                <form method="post" action="{% url 'accounts:register' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="user_type" value="individual">
+                    
+                    {{ individual_form.non_field_errors }}
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Full Name *</label>
+                        {{ individual_form.full_name }}
+                        {{ individual_form.full_name.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Email Address *</label>
+                        {{ individual_form.email }}
+                        {{ individual_form.email.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Password *</label>
+                        <div class="password-wrapper">
+                            {{ individual_form.password1 }}
+                            <i class="bi bi-eye password-toggle" onclick="togglePassword('id_password1')"></i>
+                        </div>
+                        {{ individual_form.password1.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Confirm Password *</label>
+                        <div class="password-wrapper">
+                            {{ individual_form.password2 }}
+                            <i class="bi bi-eye password-toggle" onclick="togglePassword('id_password2')"></i>
+                        </div>
+                        {{ individual_form.password2.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Mobile Number *</label>
+                        {{ individual_form.mobile }}
+                        {{ individual_form.mobile.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Area / Location *</label>
+                        {{ individual_form.location }}
+                        {{ individual_form.location.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">WhatsApp Number</label>
+                        {{ individual_form.whatsapp }}
+                        {{ individual_form.whatsapp.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Instagram Handle</label>
+                        {{ individual_form.instagram }}
+                        {{ individual_form.instagram.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">What animals do you help? *</label>
+                        <div class="checkbox-group">
+                            {% for checkbox in individual_form.animals_helped %}
+                            <div class="checkbox-item">
+                                {{ checkbox.tag }} {{ checkbox.choice_label }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {{ individual_form.animals_helped.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">About Your Help *</label>
+                        {{ individual_form.about }}
+                        {{ individual_form.about.errors }}
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="bi bi-check-circle"></i> Register as Helper
+                    </button>
+                </form>
+            </div>
+            
+            <!-- NGO Form -->
+            <div class="form-content" id="ngoForm">
+                <form method="post" action="{% url 'accounts:register' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="user_type" value="ngo">
+                    
+                    {{ ngo_form.non_field_errors }}
+                    
+                    <div class="mb-3">
+                        <label class="form-label">NGO Name *</label>
+                        {{ ngo_form.ngo_name }}
+                        {{ ngo_form.ngo_name.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Email Address *</label>
+                        {{ ngo_form.email }}
+                        {{ ngo_form.email.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Password *</label>
+                        <div class="password-wrapper">
+                            {{ ngo_form.password1 }}
+                            <i class="bi bi-eye password-toggle" onclick="togglePassword('ngo_id_password1')"></i>
+                        </div>
+                        {{ ngo_form.password1.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Confirm Password *</label>
+                        <div class="password-wrapper">
+                            {{ ngo_form.password2 }}
+                            <i class="bi bi-eye password-toggle" onclick="togglePassword('ngo_id_password2')"></i>
+                        </div>
+                        {{ ngo_form.password2.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">NGO Registration Certificate *</label>
+                        {{ ngo_form.certificate }}
+                        <small class="text-muted d-block mt-1">Supported formats: PNG, JPG, PDF (Max 5MB)</small>
+                        {{ ngo_form.certificate.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Emergency Contact Number *</label>
+                        {{ ngo_form.emergency_contact }}
+                        {{ ngo_form.emergency_contact.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Location / Address *</label>
+                        {{ ngo_form.location }}
+                        {{ ngo_form.location.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">WhatsApp Number</label>
+                        {{ ngo_form.whatsapp }}
+                        {{ ngo_form.whatsapp.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Instagram Handle</label>
+                        {{ ngo_form.instagram }}
+                        {{ ngo_form.instagram.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Telegram Handle</label>
+                        {{ ngo_form.telegram }}
+                        {{ ngo_form.telegram.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">What services do you provide? *</label>
+                        <div class="checkbox-group">
+                            {% for checkbox in ngo_form.services_provided %}
+                            <div class="checkbox-item">
+                                {{ checkbox.tag }} {{ checkbox.choice_label }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {{ ngo_form.services_provided.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Operating Hours</label>
+                        {{ ngo_form.operating_hours }}
+                        {{ ngo_form.operating_hours.errors }}
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="bi bi-check-circle"></i> Register NGO
+                    </button>
+                </form>
+            </div>
+            
+            <div class="login-link">
+                Already registered? <a href="{% url 'accounts:login' %}">Login here</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function switchTab(tabName) {
+        // Toggle tabs
+        document.getElementById('individualTab').classList.remove('active');
+        document.getElementById('ngoTab').classList.remove('active');
+        document.getElementById('individualForm').classList.remove('active');
+        document.getElementById('ngoForm').classList.remove('active');
+        
+        if (tabName === 'individual') {
+            document.getElementById('individualTab').classList.add('active');
+            document.getElementById('individualForm').classList.add('active');
+        } else {
+            document.getElementById('ngoTab').classList.add('active');
+            document.getElementById('ngoForm').classList.add('active');
+        }
+    }
+    
+    function togglePassword(fieldId) {
+        const field = document.getElementById(fieldId);
+        const icon = event.target;
+        
+        if (field.type === 'password') {
+            field.type = 'text';
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
+        } else {
+            field.type = 'password';
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
+        }
+    }
+</script>
+{% endblock %}

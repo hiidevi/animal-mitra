@@ -1,0 +1,52 @@
+# =============================================
+# ANIMAL MITRA - .gitignore
+# =============================================
+
+# ===== SECURITY - NEVER COMMIT =====
+.env
+*.key
+*.pem
+secrets.json
+db.sqlite3              # Contains user data!
+
+# ===== VIRTUAL ENVIRONMENT =====
+.venv/
+venv/
+env/
+virtualenv/
+ENV/
+
+# ===== PYTHON COMPILED FILES =====
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# ===== DJANGO SPECIFIC =====
+db.sqlite3
+db.sqlite3-journal
+media/                  # User uploads
+staticfiles/            # Collected static files
+*.log
+
+# ===== IDE / EDITOR =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ===== SYSTEM FILES =====
+*.bak
+*.tmp
+*.temp
+
+# ===== KEEP EMPTY FOLDERS =====
+# (We use .gitkeep to preserve folder structure)
+!media/.gitkeep
+!media/certificates/.gitkeep
+!static/.gitkeep
+

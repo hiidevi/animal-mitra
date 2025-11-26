@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Animal Mitra - Faridabad Animal Rescue Directory{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    {% block extra_css %}{% endblock %}
+    
+    <style>
+        :root {
+            --primary-green: #9ACD32;
+            --light-green: #C8E66C;
+            --dark-green: #7BAF2E;
+            --accent-yellow: #ADFF2F;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        /* Navbar */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-green) !important;
+        }
+        
+        .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-green) !important;
+        }
+        
+        .btn-register {
+            background: var(--primary-green);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            border: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-register:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+        }
+        
+        .btn-logout {
+            background: #dc3545;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            border: none;
+            font-weight: 600;
+        }
+        
+        .user-dropdown {
+            position: relative;
+        }
+        
+        .user-name-btn {
+            background: var(--light-green);
+            color: var(--dark-green);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            border: 2px solid var(--primary-green);
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Messages/Alerts */
+        .messages {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 9999;
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'listings:home' %}">🐾 Animal Mitra</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'listings:home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'listings:home' %}#about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'listings:home' %}#ngos">Find Help</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'listings:home' %}#contact">Contact</a></li>
+                    
+                    {% if user.is_authenticated %}
+                        <!-- Logged in user -->
+                        <li class="nav-item dropdown ms-3">
+                            <a class="nav-link dropdown-toggle user-name-btn" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                {% if user.user_type == 'individual' %}
+                                    {{ user.individual_profile.full_name|truncatewords:2 }}
+                                {% elif user.user_type == 'ngo' %}
+                                    {{ user.ngo_profile.ngo_name|truncatewords:3 }}
+                                {% elif user.user_type == 'admin' %}
+                                    Admin
+                                {% endif %}
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% if user.user_type == 'individual' %}
+                                    <li><a class="dropdown-item" href="{% url 'dashboard:individual' %}"><i class="bi bi-person-circle"></i> My Dashboard</a></li>
+                                {% elif user.user_type == 'ngo' %}
+                                    <li><a class="dropdown-item" href="{% url 'dashboard:ngo' %}"><i class="bi bi-building"></i> NGO Dashboard</a></li>
+                                {% elif user.user_type == 'admin' %}
+                                    <li><a class="dropdown-item" href="{% url 'admin_panel:panel' %}"><i class="bi bi-speedometer2"></i> Admin Panel</a></li>
+                                {% endif %}
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="{% url 'accounts:logout' %}"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <!-- Not logged in -->
+                        <li class="nav-item ms-3">
+                            <a href="{% url 'accounts:register' %}" class="btn-register me-2">Register</a>
+                            <a href="{% url 'accounts:login' %}" class="btn-register">Login</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    {% block content %}{% endblock %}
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
