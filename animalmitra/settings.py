@@ -14,7 +14,14 @@ SECRET_KEY = 'django-insecure-your-secret-key-here-change-in-production'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+# Allow Render domain
+ALLOWED_HOSTS = [
+    'animal-mitra.onrender.com',
+    '.onrender.com',
+    'localhost',
+    '127.0.0.1',
+]
 
 # Application definition
 INSTALLED_APPS = [
