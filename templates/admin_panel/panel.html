@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load admin_filters %}  <!-- ADD THIS LINE -->
 
 {% block title %}Admin Panel - Animal Mitra{% endblock %}
 
@@ -459,7 +460,7 @@ body {
                       <tbody>
                         {% for key, value in user.pending_update.data.items %}
                           <tr>
-                            <td class="fw-bold">{{ key|title }}</td>
+                            <td class="fw-bold">{{ key|replace_underscore|title }}</td>
                             <td>{{ value }}</td>
                           </tr>
                         {% endfor %}
