@@ -1,6 +1,7 @@
 """
 Views for admin panel with email notifications
 Fixed: Async email sending to prevent timeouts
+Added: Rejection and deletion notifications
 """
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -11,17 +12,11 @@ from accounts.models import User, IndividualHelper, NGO, PendingProfileUpdate
 from threading import Thread
 import logging
 
-# Setup logger for debugging
 logger = logging.getLogger(__name__)
 
 
 def send_approval_email_async(user_email, user_type_display):
-    """
-    Send approval email in background thread (non-blocking)
-    
-    Problem: send_mail() blocks the request = timeout on Render
-    Solution: Run in separate thread = immediate response
-    """
+    """Send approval email in background thread (non-blocking)"""
     def send_email():
         subject = '🎉 Your Animal Mitra Account Has Been Approved!'
         message = f"""
@@ -41,33 +36,52 @@ Thank you for joining Animal Mitra! Together, we can make a difference for anima
 
 Best regards,
 Animal Mitra Team
-
----
-Note: If you need to update your information, please log in to your dashboard.
         """
         
         try:
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                [user_email],
-                fail_silently=False,
-            )
-            logger.info(f'✅ Approval email sent successfully to {user_email}')
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user_email], fail_silently=False)
+            logger.info(f'✅ Approval email sent to {user_email}')
         except Exception as e:
             logger.error(f'❌ Email failed for {user_email}: {str(e)}')
     
-    # Run email sending in background thread
     thread = Thread(target=send_email)
-    thread.daemon = True  # Thread dies when main program exits
+    thread.daemon = True
+    thread.start()
+
+
+def send_rejection_email_async(user_email):
+    """Send account rejection email (async)"""
+    def send_email():
+        subject = '❌ Your Animal Mitra Registration Status'
+        message = f"""
+Dear {user_email},
+
+Thank you for your interest in joining Animal Mitra.
+
+Unfortunately, your registration request has not been approved at this time. This may be due to:
+- Incomplete information
+- Verification requirements not met
+- Duplicate registration
+
+If you believe this is an error or would like to reapply with updated information, please contact us at contact@animal-mitra.com
+
+Best regards,
+Animal Mitra Team
+        """
+        
+        try:
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user_email], fail_silently=False)
+            logger.info(f'✅ Rejection email sent to {user_email}')
+        except Exception as e:
+            logger.error(f'❌ Email failed for {user_email}: {str(e)}')
+    
+    thread = Thread(target=send_email)
+    thread.daemon = True
     thread.start()
 
 
 def send_update_approval_email_async(user_email):
-    """
-    Send profile update approval email (async)
-    """
+    """Send profile update approval email (async)"""
     def send_email():
         subject = '✅ Your Profile Update Has Been Approved!'
         message = f"""
@@ -84,13 +98,7 @@ Animal Mitra Team
         """
         
         try:
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                [user_email],
-                fail_silently=False,
-            )
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user_email], fail_silently=False)
             logger.info(f'✅ Update approval email sent to {user_email}')
         except Exception as e:
             logger.error(f'❌ Email failed for {user_email}: {str(e)}')
@@ -101,9 +109,7 @@ Animal Mitra Team
 
 
 def send_deletion_cancelled_email_async(user_email):
-    """
-    Send deletion cancelled email (async)
-    """
+    """Send deletion cancelled email (async)"""
     def send_email():
         subject = '✅ Account Deletion Cancelled'
         message = f"""
@@ -120,14 +126,43 @@ Animal Mitra Team
         """
         
         try:
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                [user_email],
-                fail_silently=False,
-            )
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user_email], fail_silently=False)
             logger.info(f'✅ Cancellation email sent to {user_email}')
+        except Exception as e:
+            logger.error(f'❌ Email failed for {user_email}: {str(e)}')
+    
+    thread = Thread(target=send_email)
+    thread.daemon = True
+    thread.start()
+
+
+def send_account_deleted_email_async(user_email, user_name):
+    """Send account deletion notification email (async)"""
+    def send_email():
+        subject = '⚠️ Your Animal Mitra Account Has Been Deleted'
+        message = f"""
+Dear {user_name or user_email},
+
+This is to inform you that your Animal Mitra account has been permanently deleted from our system.
+
+Account Details:
+- Email: {user_email}
+- Deletion Date: Today
+
+All your information has been removed from our database. If you believe this was done in error, please contact us immediately at contact@animal-mitra.com
+
+If you wish to register again in the future, you can do so at:
+https://animal-mitra.onrender.com/accounts/register/
+
+Thank you for being part of Animal Mitra.
+
+Best regards,
+Animal Mitra Team
+        """
+        
+        try:
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user_email], fail_silently=False)
+            logger.info(f'✅ Deletion notification sent to {user_email}')
         except Exception as e:
             logger.error(f'❌ Email failed for {user_email}: {str(e)}')
     
@@ -138,20 +173,15 @@ Animal Mitra Team
 
 @login_required
 def admin_panel(request):
-    """
-    Main admin panel view with tabs
-    """
+    """Main admin panel view with tabs"""
     if request.user.user_type != 'admin':
         messages.error(request, 'Access denied - Admin only')
         return redirect('listings:home')
     
-    # Get all users with different statuses
     all_users = User.objects.exclude(user_type='admin')
     pending_users = all_users.filter(status='pending').select_related('individual_profile', 'ngo_profile')
     verified_users = all_users.filter(status='verified').select_related('individual_profile', 'ngo_profile')
     rejected_users = all_users.filter(status='rejected').select_related('individual_profile', 'ngo_profile')
-    
-    # Get pending updates and deletion requests
     pending_updates = all_users.filter(status='pending_update').select_related('individual_profile', 'ngo_profile', 'pending_update')
     deletion_requests = all_users.filter(status='deletion_requested').select_related('individual_profile', 'ngo_profile')
     
@@ -174,14 +204,7 @@ def admin_panel(request):
 
 @login_required
 def approve_user(request, user_id):
-    """
-    Approve a pending user and send email notification
-    
-    FIXED: Email now sends asynchronously (non-blocking)
-    - No more timeouts!
-    - Immediate response to admin
-    - Email sends in background
-    """
+    """Approve a pending user - FIXED: Async email sending"""
     if request.user.user_type != 'admin':
         messages.error(request, 'Access denied')
         return redirect('listings:home')
@@ -194,7 +217,6 @@ def approve_user(request, user_id):
         # Send email asynchronously (non-blocking)
         send_approval_email_async(user.email, user.get_user_type_display())
         
-        # Immediate success message (don't wait for email)
         messages.success(request, f'✅ {user.email} approved! Notification email is being sent.')
         logger.info(f'Admin approved user: {user.email}')
     
@@ -203,28 +225,29 @@ def approve_user(request, user_id):
 
 @login_required
 def reject_user(request, user_id):
-    """
-    Reject a pending user
-    """
+    """Reject a pending user - NEW: Sends rejection email"""
     if request.user.user_type != 'admin':
         messages.error(request, 'Access denied')
         return redirect('listings:home')
     
     if request.method == 'POST':
         user = get_object_or_404(User, id=user_id)
+        user_email = user.email
         user.status = 'rejected'
         user.save()
-        messages.warning(request, f'{user.email} has been rejected.')
-        logger.info(f'Admin rejected user: {user.email}')
+        
+        # Send rejection email
+        send_rejection_email_async(user_email)
+        
+        messages.warning(request, f'{user_email} has been rejected. Notification sent.')
+        logger.info(f'Admin rejected user: {user_email}')
     
     return redirect('admin_panel:panel')
 
 
 @login_required
 def edit_user(request, user_id):
-    """
-    Edit user information (admin direct edit)
-    """
+    """Edit user information (admin direct edit)"""
     if request.user.user_type != 'admin':
         messages.error(request, 'Access denied')
         return redirect('listings:home')
@@ -263,30 +286,45 @@ def edit_user(request, user_id):
 
 @login_required
 def delete_user(request, user_id):
-    """
-    Delete user permanently (and their profile)
-    """
+    """Delete user permanently (from verified/rejected lists)"""
     if request.user.user_type != 'admin':
         messages.error(request, 'Access denied')
         return redirect('listings:home')
     
     if request.method == 'POST':
         user = get_object_or_404(User, id=user_id)
-        email = user.email
-        user.delete()  # Cascade delete will remove profile too
-        messages.success(request, f'{email} has been deleted permanently.')
-        logger.info(f'Admin deleted user: {email}')
+        
+        # Save user info before deletion
+        user_email = user.email
+        user_name = None
+        
+        # Get user's name before deletion
+        if user.user_type == 'individual':
+            try:
+                user_name = user.individual_profile.full_name
+            except:
+                pass
+        elif user.user_type == 'ngo':
+            try:
+                user_name = user.ngo_profile.ngo_name
+            except:
+                pass
+        
+        # Send notification BEFORE deleting
+        send_account_deleted_email_async(user_email, user_name)
+        
+        # Now delete the account
+        user.delete()
+        
+        messages.success(request, f'{user_email} has been deleted permanently. Notification sent.')
+        logger.info(f'Admin deleted user: {user_email}')
     
     return redirect('admin_panel:panel')
 
 
 @login_required
 def approve_update(request, user_id):
-    """
-    Approve profile update changes
-    
-    FIXED: Async email sending
-    """
+    """Approve profile update changes - FIXED: Async email"""
     if request.user.user_type != 'admin':
         messages.error(request, 'Access denied')
         return redirect('listings:home')
@@ -297,24 +335,21 @@ def approve_update(request, user_id):
         try:
             pending = user.pending_update
             
-            # Apply changes to actual profile
             if user.user_type == 'individual':
                 profile = user.individual_profile
                 for key, value in pending.data.items():
                     setattr(profile, key, value)
                 profile.save()
-            else:  # NGO
+            else:
                 profile = user.ngo_profile
                 for key, value in pending.data.items():
                     setattr(profile, key, value)
                 profile.save()
             
-            # Delete pending update and change status back to verified
             pending.delete()
             user.status = 'verified'
             user.save()
             
-            # Send email asynchronously
             send_update_approval_email_async(user.email)
             
             messages.success(request, f'✅ Profile update approved for {user.email}! Notification being sent.')
@@ -328,9 +363,7 @@ def approve_update(request, user_id):
 
 @login_required
 def reject_update(request, user_id):
-    """
-    Reject profile update changes (keep old data)
-    """
+    """Reject profile update changes (keep old data)"""
     if request.user.user_type != 'admin':
         messages.error(request, 'Access denied')
         return redirect('listings:home')
@@ -340,8 +373,8 @@ def reject_update(request, user_id):
         
         try:
             pending = user.pending_update
-            pending.delete()  # Discard changes
-            user.status = 'verified'  # Back to verified
+            pending.delete()
+            user.status = 'verified'
             user.save()
             
             messages.warning(request, f'Profile update rejected for {user.email}. Old data kept.')
@@ -354,40 +387,54 @@ def reject_update(request, user_id):
 
 @login_required
 def approve_deletion(request, user_id):
-    """
-    Approve and delete user account permanently
-    """
+    """Approve and delete user account permanently - NEW: Sends deletion notification"""
     if request.user.user_type != 'admin':
         messages.error(request, 'Access denied')
         return redirect('listings:home')
     
     if request.method == 'POST':
         user = get_object_or_404(User, id=user_id)
-        email = user.email
-        user.delete()  # Permanently delete
-        messages.success(request, f'Account deleted: {email}')
-        logger.info(f'Admin approved deletion: {email}')
+        
+        # Save user info before deletion
+        user_email = user.email
+        user_name = None
+        
+        # Get user's name before deletion
+        if user.user_type == 'individual':
+            try:
+                user_name = user.individual_profile.full_name
+            except:
+                pass
+        elif user.user_type == 'ngo':
+            try:
+                user_name = user.ngo_profile.ngo_name
+            except:
+                pass
+        
+        # Send notification BEFORE deleting
+        send_account_deleted_email_async(user_email, user_name)
+        
+        # Now delete the account
+        user.delete()
+        
+        messages.success(request, f'Account deleted: {user_email}. Notification sent.')
+        logger.info(f'Admin approved deletion: {user_email}')
     
     return redirect('admin_panel:panel')
 
 
 @login_required
 def cancel_deletion(request, user_id):
-    """
-    Cancel deletion request (restore account)
-    
-    FIXED: Async email sending
-    """
+    """Cancel deletion request (restore account) - FIXED: Async email"""
     if request.user.user_type != 'admin':
         messages.error(request, 'Access denied')
         return redirect('listings:home')
     
     if request.method == 'POST':
         user = get_object_or_404(User, id=user_id)
-        user.status = 'verified'  # Restore to verified
+        user.status = 'verified'
         user.save()
         
-        # Send email asynchronously
         send_deletion_cancelled_email_async(user.email)
         
         messages.success(request, f'✅ Deletion cancelled for {user.email}. Account restored. Notification being sent.')
