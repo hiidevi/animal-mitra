@@ -34,6 +34,8 @@ Account Details:
 
 Thank you for joining Animal Mitra! Together, we can make a difference for animals in need.
 
+If you have any questions, contact us at: animalmitra.fd@gmail.com
+
 Best regards,
 Animal Mitra Team
         """
@@ -63,7 +65,7 @@ Unfortunately, your registration request has not been approved at this time. Thi
 - Verification requirements not met
 - Duplicate registration
 
-If you believe this is an error or would like to reapply with updated information, please contact us at contact@animal-mitra.com
+If you believe this is an error or would like to reapply with updated information, please contact us at animalmitra.fd@gmail.com
 
 Best regards,
 Animal Mitra Team
@@ -93,6 +95,8 @@ Your updated information is now live on Animal Mitra.
 
 Login to view: https://animal-mitra.onrender.com/accounts/login/
 
+If you have any questions, contact us at: animalmitra.fd@gmail.com
+
 Best regards,
 Animal Mitra Team
         """
@@ -120,6 +124,8 @@ Your account deletion request has been cancelled by our admin team.
 Your account is still active and you can continue using Animal Mitra.
 
 Login: https://animal-mitra.onrender.com/accounts/login/
+
+If you have any questions, contact us at: animalmitra.fd@gmail.com
 
 Best regards,
 Animal Mitra Team
@@ -149,7 +155,7 @@ Account Details:
 - Email: {user_email}
 - Deletion Date: Today
 
-All your information has been removed from our database. If you believe this was done in error, please contact us immediately at contact@animal-mitra.com
+All your information has been removed from our database. If you believe this was done in error, please contact us immediately at animalmitra.fd@gmail.com
 
 If you wish to register again in the future, you can do so at:
 https://animal-mitra.onrender.com/accounts/register/
