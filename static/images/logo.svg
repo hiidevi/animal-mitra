@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+    <circle cx="256" cy="256" r="240" fill="#9ACD32"/>
+    <circle cx="256" cy="256" r="220" fill="#ADFF2F"/>
+    <ellipse cx="256" cy="300" rx="70" ry="85" fill="#FFFFFF" opacity="0.95"/>
+    <ellipse cx="190" cy="220" rx="35" ry="45" fill="#FFFFFF" opacity="0.95" transform="rotate(-20 190 220)"/>
+    <ellipse cx="256" cy="200" rx="35" ry="45" fill="#FFFFFF" opacity="0.95"/>
+    <ellipse cx="322" cy="220" rx="35" ry="45" fill="#FFFFFF" opacity="0.95" transform="rotate(20 322 220)"/>
+    <ellipse cx="305" cy="265" rx="32" ry="42" fill="#FFFFFF" opacity="0.95" transform="rotate(10 305 265)"/>
+    <path d="M 256 270 C 256 260, 246 255, 238 255 C 230 255, 225 260, 225 268 C 225 280, 235 290, 256 305 C 277 290, 287 280, 287 268 C 287 260, 282 255, 274 255 C 266 255, 256 260, 256 270 Z" fill="#7BAF2E"/>
+    <circle cx="256" cy="256" r="240" fill="none" stroke="#7BAF2E" stroke-width="8"/>
+    <text x="256" y="430" font-family="Arial" font-size="80" font-weight="bold" fill="#FFFFFF" text-anchor="middle">AM</text>
+    <ellipse cx="256" cy="470" rx="180" ry="20" fill="#000000" opacity="0.1"/>
+</svg>

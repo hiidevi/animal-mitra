@@ -1,0 +1,11 @@
+# robots.txt for Animal Mitra
+# https://animal-mitra.onrender.com
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /admin-panel/
+Disallow: /accounts/
+Disallow: /dashboard/
+
+Sitemap: https://animal-mitra.onrender.com/sitemap.xml

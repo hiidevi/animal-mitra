@@ -1,25 +1,133 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- ===== PRIMARY META TAGS (SEO) ===== -->
     <title>{% block title %}Animal Mitra - Faridabad Animal Rescue Directory{% endblock %}</title>
-    
+
+    <meta name="title" content="{% block meta_title %}Animal Mitra - Faridabad Animal Rescue Directory{% endblock %}">
+
+    <meta name="description"
+        content="{% block meta_description %}Connect with verified NGOs, volunteers, and animal welfare organizations in Faridabad. Get immediate help for injured street dogs, cattle rescue, and report animal abuse. Your trusted animal rescue directory.{% endblock %}">
+
+    <meta name="keywords"
+        content="{% block meta_keywords %}animal rescue Faridabad, NGO Faridabad, animal welfare, street dog rescue, cattle rescue, animal abuse reporting, volunteer Faridabad, animal help Faridabad, emergency animal rescue, animal shelter Faridabad, dog rescue near me, cow rescue Faridabad, bird rescue, cat rescue Haryana{% endblock %}">
+
+    <meta name="author" content="Animal Mitra">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="3 days">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+
+    <!-- ===== CANONICAL URL ===== -->
+    <link rel="canonical" href="https://animal-mitra.onrender.com{% block canonical_url %}{% endblock %}">
+
+    <!-- ===== OPEN GRAPH (Facebook, WhatsApp, LinkedIn) ===== -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://animal-mitra.onrender.com{% block og_url %}{% endblock %}">
+    <meta property="og:title"
+        content="{% block og_title %}Animal Mitra - Faridabad Animal Rescue Directory{% endblock %}">
+    <meta property="og:description"
+        content="{% block og_description %}Connect with verified NGOs and volunteers for animal rescue in Faridabad. Get immediate help for animals in distress.{% endblock %}">
+    <meta property="og:image" content="https://animal-mitra.onrender.com{% static 'images/og-image.jpg' %}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Animal Mitra">
+    <meta property="og:locale" content="en_IN">
+
+    <!-- ===== TWITTER CARD ===== -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://animal-mitra.onrender.com{% block twitter_url %}{% endblock %}">
+    <meta name="twitter:title"
+        content="{% block twitter_title %}Animal Mitra - Faridabad Animal Rescue Directory{% endblock %}">
+    <meta name="twitter:description"
+        content="{% block twitter_description %}Connect with verified NGOs and volunteers for animal rescue in Faridabad.{% endblock %}">
+    <meta name="twitter:image" content="https://animal-mitra.onrender.com{% static 'images/twitter-card.jpg' %}">
+
+    <!-- ===== GEO TAGS (Local SEO) ===== -->
+    <meta name="geo.region" content="IN-HR">
+    <meta name="geo.placename" content="Faridabad">
+    <meta name="geo.position" content="28.4089;77.3178">
+    <meta name="ICBM" content="28.4089, 77.3178">
+
+    <!-- ===== FAVICON & ICONS ===== -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+    <meta name="theme-color" content="#9ACD32">
+
+    <!-- ===== STRUCTURED DATA (Schema.org) ===== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Animal Mitra",
+      "alternateName": "Animal Mitra Faridabad",
+      "url": "https://animal-mitra.onrender.com",
+      "logo": "https://animal-mitra.onrender.com{% static 'images/logo.png' %}",
+      "description": "Animal rescue directory connecting people with verified NGOs and volunteers in Faridabad for immediate animal welfare assistance",
+      "email": "animalmitra.fd@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Faridabad",
+        "addressRegion": "Haryana",
+        "postalCode": "121001",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "28.4089",
+        "longitude": "77.3178"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Faridabad"
+      },
+      "sameAs": [
+        "https://www.facebook.com/animalmitra",
+        "https://www.instagram.com/animalmitra"
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Animal Mitra",
+      "url": "https://animal-mitra.onrender.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://animal-mitra.onrender.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    {% block extra_schema %}{% endblock %}
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Custom CSS -->
     {% block extra_css %}{% endblock %}
-    
+
     <style>
         :root {
             --primary-green: #9ACD32;
@@ -27,35 +135,35 @@
             --dark-green: #7BAF2E;
             --accent-yellow: #ADFF2F;
         }
-        
+
         body {
             font-family: 'Poppins', sans-serif;
         }
-        
+
         /* Navbar */
         .navbar {
             background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 1rem 0;
         }
-        
+
         .navbar-brand {
             font-size: 1.8rem;
             font-weight: bold;
             color: var(--primary-green) !important;
         }
-        
+
         .nav-link {
             color: #333 !important;
             font-weight: 500;
             margin: 0 1rem;
             transition: color 0.3s;
         }
-        
+
         .nav-link:hover {
             color: var(--primary-green) !important;
         }
-        
+
         .btn-register {
             background: var(--primary-green);
             color: white;
@@ -65,12 +173,12 @@
             font-weight: 600;
             transition: all 0.3s;
         }
-        
+
         .btn-register:hover {
             background: var(--dark-green);
             transform: translateY(-2px);
         }
-        
+
         .btn-logout {
             background: #dc3545;
             color: white;
@@ -79,11 +187,11 @@
             border: none;
             font-weight: 600;
         }
-        
+
         .user-dropdown {
             position: relative;
         }
-        
+
         .user-name-btn {
             background: var(--light-green);
             color: var(--dark-green);
@@ -93,7 +201,7 @@
             font-weight: 600;
             cursor: pointer;
         }
-        
+
         /* Messages/Alerts */
         .messages {
             position: fixed;
@@ -104,12 +212,19 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" role="navigation" aria-label="Main navigation">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'listings:home' %}">🐾 Animal Mitra</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <a class="navbar-brand" href="{% url 'listings:home' %}">
+                <img src="{% static 'images/logo.svg' %}" alt="Animal Mitra Logo" width="40" height="40"
+                    style="margin-right: 10px; vertical-align: middle;">
+                Animal Mitra
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -118,62 +233,75 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'listings:home' %}#about">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'listings:home' %}#ngos">Find Help</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'listings:home' %}#contact">Contact</a></li>
-                    
+
                     {% if user.is_authenticated %}
-                        <!-- Logged in user -->
-                        <li class="nav-item dropdown ms-3">
-                            <a class="nav-link dropdown-toggle user-name-btn" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                                {% if user.user_type == 'individual' %}
-                                    {{ user.individual_profile.full_name|truncatewords:2 }}
-                                {% elif user.user_type == 'ngo' %}
-                                    {{ user.ngo_profile.ngo_name|truncatewords:3 }}
-                                {% elif user.user_type == 'admin' %}
-                                    Admin
-                                {% endif %}
-                            </a>
-                            <ul class="dropdown-menu">
-                                {% if user.user_type == 'individual' %}
-                                    <li><a class="dropdown-item" href="{% url 'dashboard:individual' %}"><i class="bi bi-person-circle"></i> My Dashboard</a></li>
-                                {% elif user.user_type == 'ngo' %}
-                                    <li><a class="dropdown-item" href="{% url 'dashboard:ngo' %}"><i class="bi bi-building"></i> NGO Dashboard</a></li>
-                                {% elif user.user_type == 'admin' %}
-                                    <li><a class="dropdown-item" href="{% url 'admin_panel:panel' %}"><i class="bi bi-speedometer2"></i> Admin Panel</a></li>
-                                {% endif %}
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item text-danger" href="{% url 'accounts:logout' %}"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
-                            </ul>
-                        </li>
+                    <!-- Logged in user -->
+                    <li class="nav-item dropdown ms-3">
+                        <a class="nav-link dropdown-toggle user-name-btn" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {% if user.user_type == 'individual' %}
+                            {{ user.individual_profile.full_name|truncatewords:2 }}
+                            {% elif user.user_type == 'ngo' %}
+                            {{ user.ngo_profile.ngo_name|truncatewords:3 }}
+                            {% elif user.user_type == 'admin' %}
+                            Admin
+                            {% endif %}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% if user.user_type == 'individual' %}
+                            <li><a class="dropdown-item" href="{% url 'dashboard:individual' %}"><i
+                                        class="bi bi-person-circle"></i> My Dashboard</a></li>
+                            {% elif user.user_type == 'ngo' %}
+                            <li><a class="dropdown-item" href="{% url 'dashboard:ngo' %}"><i class="bi bi-building"></i>
+                                    NGO Dashboard</a></li>
+                            {% elif user.user_type == 'admin' %}
+                            <li><a class="dropdown-item" href="{% url 'admin_panel:panel' %}"><i
+                                        class="bi bi-speedometer2"></i> Admin Panel</a></li>
+                            {% endif %}
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item text-danger" href="{% url 'accounts:logout' %}"><i
+                                        class="bi bi-box-arrow-right"></i> Logout</a></li>
+                        </ul>
+                    </li>
                     {% else %}
-                        <!-- Not logged in -->
-                        <li class="nav-item ms-3">
-                            <a href="{% url 'accounts:register' %}" class="btn-register me-2">Register</a>
-                            <a href="{% url 'accounts:login' %}" class="btn-register">Login</a>
-                        </li>
+                    <!-- Not logged in -->
+                    <li class="nav-item ms-3">
+                        <a href="{% url 'accounts:register' %}" class="btn-register me-2">Register</a>
+                        <a href="{% url 'accounts:login' %}" class="btn-register">Login</a>
+                    </li>
                     {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
 
+
     <!-- Messages -->
     {% if messages %}
-    <div class="messages">
+    <div class="messages" role="alert" aria-live="polite">
         {% for message in messages %}
         <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
             {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         {% endfor %}
     </div>
     {% endif %}
 
+
     <!-- Main Content -->
-    {% block content %}{% endblock %}
+    <main role="main">
+        {% block content %}{% endblock %}
+    </main>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Custom JS -->
     {% block extra_js %}{% endblock %}
 </body>
+
 </html>

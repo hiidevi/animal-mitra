@@ -1,0 +1,26 @@
+# robots.txt for Animal Mitra
+# https://animal-mitra.onrender.com
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /admin-panel/
+Disallow: /accounts/
+Disallow: /dashboard/
+Disallow: /static/admin/
+
+# Sitemap location
+Sitemap: https://animal-mitra.onrender.com/sitemap.xml
+
+# Crawl delay (be nice to servers)
+Crawl-delay: 10
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /

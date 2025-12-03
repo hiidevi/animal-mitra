@@ -5,6 +5,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.sitemaps.views import sitemap
+from django.views.generic import TemplateView
+from listings.sitemaps import StaticViewSitemap, HomeSitemap
+
+
+# Sitemap configuration for SEO
+sitemaps = {
+    'static': StaticViewSitemap,
+    'home': HomeSitemap,
+}
+
 
 urlpatterns = [
     # Django admin (built-in)
@@ -21,7 +32,12 @@ urlpatterns = [
     
     # Custom admin panel
     path('admin-panel/', include('admin_panel.urls')),
+    
+    # SEO URLs
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
+    path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain'), name='robots'),
 ]
+
 
 # Serve media files in development
 if settings.DEBUG:
