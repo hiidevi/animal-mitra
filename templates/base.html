@@ -297,8 +297,369 @@
     </main>
 
 
+    <!-- Footer - Modern Design -->
+    <footer class="py-5" role="contentinfo"
+        style="background: linear-gradient(135deg, #7BAF2E 0%, #6b9929 100%); color: white; margin-top: 80px; border-top: 4px solid #9ACD32;">
+        <div class="container">
+            <div class="row g-4">
+                <!-- About Section -->
+                <div class="col-lg-4 col-md-6">
+                    <h5 style="color: white; font-weight: 700; margin-bottom: 1rem;">
+                        <i class="bi bi-heart-fill" style="color: #ADFF2F;"></i> Animal Mitra
+                    </h5>
+                    <p style="color: rgba(255,255,255,0.95); line-height: 1.6;">
+                        Connecting Faridabad with verified animal rescue resources.
+                        Together, we make a difference for animals in need.
+                    </p>
+                    <div class="social-links" style="margin-top: 1.5rem;">
+                        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"
+                            aria-label="Facebook" style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255, 255, 255, 0.15); 
+                              display: inline-flex; align-items: center; justify-content: center; margin-right: 12px; 
+                              color: white; text-decoration: none; transition: all 0.3s ease;"
+                            onmouseover="this.style.background='white'; this.style.color='#7BAF2E'; this.style.transform='translateY(-5px)'"
+                            onmouseout="this.style.background='rgba(255, 255, 255, 0.15)'; this.style.color='white'; this.style.transform='translateY(0)'">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"
+                            aria-label="Instagram" style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255, 255, 255, 0.15); 
+                              display: inline-flex; align-items: center; justify-content: center; margin-right: 12px; 
+                              color: white; text-decoration: none; transition: all 0.3s ease;"
+                            onmouseover="this.style.background='white'; this.style.color='#7BAF2E'; this.style.transform='translateY(-5px)'"
+                            onmouseout="this.style.background='rgba(255, 255, 255, 0.15)'; this.style.color='white'; this.style.transform='translateY(0)'">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"
+                            style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255, 255, 255, 0.15); 
+                              display: inline-flex; align-items: center; justify-content: center; margin-right: 12px; 
+                              color: white; text-decoration: none; transition: all 0.3s ease;"
+                            onmouseover="this.style.background='white'; this.style.color='#7BAF2E'; this.style.transform='translateY(-5px)'"
+                            onmouseout="this.style.background='rgba(255, 255, 255, 0.15)'; this.style.color='white'; this.style.transform='translateY(0)'">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                        <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer"
+                            aria-label="WhatsApp" style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255, 255, 255, 0.15); 
+                              display: inline-flex; align-items: center; justify-content: center; margin-right: 12px; 
+                              color: white; text-decoration: none; transition: all 0.3s ease;"
+                            onmouseover="this.style.background='white'; this.style.color='#7BAF2E'; this.style.transform='translateY(-5px)'"
+                            onmouseout="this.style.background='rgba(255, 255, 255, 0.15)'; this.style.color='white'; this.style.transform='translateY(0)'">
+                            <i class="bi bi-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6">
+                    <h5 style="color: white; font-weight: 700; margin-bottom: 1rem;">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="{% url 'listings:home' %}"
+                                style="color: rgba(255, 255, 255, 0.85); text-decoration: none; transition: all 0.3s ease; display: inline-block;"
+                                onmouseover="this.style.color='white'; this.style.transform='translateX(5px)'"
+                                onmouseout="this.style.color='rgba(255, 255, 255, 0.85)'; this.style.transform='translateX(0)'">
+                                <i class="bi bi-house-door"></i> Home
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="{% url 'listings:home' %}#about"
+                                style="color: rgba(255, 255, 255, 0.85); text-decoration: none; transition: all 0.3s ease; display: inline-block;"
+                                onmouseover="this.style.color='white'; this.style.transform='translateX(5px)'"
+                                onmouseout="this.style.color='rgba(255, 255, 255, 0.85)'; this.style.transform='translateX(0)'">
+                                <i class="bi bi-info-circle"></i> About Us
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="{% url 'listings:home' %}#ngos"
+                                style="color: rgba(255, 255, 255, 0.85); text-decoration: none; transition: all 0.3s ease; display: inline-block;"
+                                onmouseover="this.style.color='white'; this.style.transform='translateX(5px)'"
+                                onmouseout="this.style.color='rgba(255, 255, 255, 0.85)'; this.style.transform='translateX(0)'">
+                                <i class="bi bi-search"></i> Find Help
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="{% url 'listings:home' %}#contact"
+                                style="color: rgba(255, 255, 255, 0.85); text-decoration: none; transition: all 0.3s ease; display: inline-block;"
+                                onmouseover="this.style.color='white'; this.style.transform='translateX(5px)'"
+                                onmouseout="this.style.color='rgba(255, 255, 255, 0.85)'; this.style.transform='translateX(0)'">
+                                <i class="bi bi-envelope"></i> Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- For Helpers -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 style="color: white; font-weight: 700; margin-bottom: 1rem;">For Helpers</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="{% url 'accounts:register' %}"
+                                style="color: rgba(255, 255, 255, 0.85); text-decoration: none; transition: all 0.3s ease; display: inline-block;"
+                                onmouseover="this.style.color='white'; this.style.transform='translateX(5px)'"
+                                onmouseout="this.style.color='rgba(255, 255, 255, 0.85)'; this.style.transform='translateX(0)'">
+                                <i class="bi bi-person-plus"></i> Register as Helper
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="{% url 'accounts:login' %}"
+                                style="color: rgba(255, 255, 255, 0.85); text-decoration: none; transition: all 0.3s ease; display: inline-block;"
+                                onmouseover="this.style.color='white'; this.style.transform='translateX(5px)'"
+                                onmouseout="this.style.color='rgba(255, 255, 255, 0.85)'; this.style.transform='translateX(0)'">
+                                <i class="bi bi-box-arrow-in-right"></i> Helper Login
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="{% url 'listings:privacy_policy' %}"
+                                style="color: rgba(255, 255, 255, 0.85); text-decoration: none; transition: all 0.3s ease; display: inline-block;"
+                                onmouseover="this.style.color='white'; this.style.transform='translateX(5px)'"
+                                onmouseout="this.style.color='rgba(255, 255, 255, 0.85)'; this.style.transform='translateX(0)'">
+                                <i class="bi bi-shield-check"></i> Privacy Policy
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="{% url 'listings:home' %}#how-it-works"
+                                style="color: rgba(255, 255, 255, 0.85); text-decoration: none; transition: all 0.3s ease; display: inline-block;"
+                                onmouseover="this.style.color='white'; this.style.transform='translateX(5px)'"
+                                onmouseout="this.style.color='rgba(255, 255, 255, 0.85)'; this.style.transform='translateX(0)'">
+                                <i class="bi bi-question-circle"></i> How It Works
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 style="color: white; font-weight: 700; margin-bottom: 1rem;">Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2" style="color: rgba(255,255,255,0.95);">
+                            <i class="bi bi-envelope-fill" style="color: #ADFF2F; margin-right: 8px;"></i>
+                            <a href="mailto:animalmitra.fd@gmail.com"
+                                style="color: rgba(255, 255, 255, 0.95); text-decoration: none; transition: color 0.3s;"
+                                onmouseover="this.style.color='white'"
+                                onmouseout="this.style.color='rgba(255, 255, 255, 0.95)'">
+                                animalmitra.fd@gmail.com
+                            </a>
+                        </li>
+                        <li class="mb-2" style="color: rgba(255,255,255,0.95);">
+                            <i class="bi bi-telephone-fill" style="color: #ADFF2F; margin-right: 8px;"></i>
+                            <a href="tel:+919876543210"
+                                style="color: rgba(255, 255, 255, 0.95); text-decoration: none; transition: color 0.3s;"
+                                onmouseover="this.style.color='white'"
+                                onmouseout="this.style.color='rgba(255, 255, 255, 0.95)'">
+                                +91 8076760386
+                            </a>
+                        </li>
+                        <li class="mb-2" style="color: rgba(255,255,255,0.95);">
+                            <i class="bi bi-geo-alt-fill" style="color: #ADFF2F; margin-right: 8px;"></i>
+                            Faridabad, Haryana, India
+                        </li>
+                        <li class="mb-2" style="color: rgba(255,255,255,0.95);">
+                            <i class="bi bi-clock-fill" style="color: #ADFF2F; margin-right: 8px;"></i>
+                            24/7 Emergency Support
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr style="background: rgba(255,255,255,0.2); margin: 30px 0; border: none; height: 1px;">
+
+            <!-- Bottom Bar -->
+            <div class="text-center">
+                <p class="mb-0" style="color: rgba(255,255,255,0.95); font-size: 0.95rem;">
+                    &copy; 2025 <strong>Animal Mitra</strong>. All rights reserved. |
+                    Made with <i class="bi bi-heart-fill text-danger"></i> for animals in Faridabad
+                </p>
+                <p class="mb-0 mt-2" style="color: rgba(255,255,255,0.75); font-size: 0.85rem;">
+                    <a href="{% url 'listings:privacy_policy' %}"
+                        style="color: rgba(255, 255, 255, 0.85); text-decoration: none; margin: 0 10px; transition: color 0.3s;"
+                        onmouseover="this.style.color='white'"
+                        onmouseout="this.style.color='rgba(255, 255, 255, 0.85)'">
+                        Privacy Policy
+                    </a> |
+                    <a href="{% url 'listings:home' %}#about"
+                        style="color: rgba(255, 255, 255, 0.85); text-decoration: none; margin: 0 10px; transition: color 0.3s;"
+                        onmouseover="this.style.color='white'"
+                        onmouseout="this.style.color='rgba(255, 255, 255, 0.85)'">
+                        Terms of Service
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+    <!-- Cookie Consent Popup -->
+    <div id="cookieConsent" style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
+         max-width: 600px; width: 90%; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); 
+         padding: 30px; z-index: 10000; animation: slideUp 0.5s ease;">
+        <div style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 10px;">🍪</div>
+            <h3 style="color: #7BAF2E; font-weight: 700; margin-bottom: 15px;">We Use Cookies</h3>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 25px;">
+                We use cookies to improve your experience, analyze site usage, and remember your preferences.
+                By clicking "Accept All", you consent to our use of cookies.
+            </p>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <button onclick="acceptCookies()" style="background: #9ACD32; color: white; border: none; padding: 12px 30px; 
+                               border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s;"
+                    onmouseover="this.style.background='#7BAF2E'; this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='#9ACD32'; this.style.transform='translateY(0)'">
+                    Accept All
+                </button>
+                <button onclick="rejectCookies()" style="background: white; color: #666; border: 2px solid #ddd; padding: 12px 30px; 
+                               border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s;"
+                    onmouseover="this.style.borderColor='#7BAF2E'; this.style.color='#7BAF2E'"
+                    onmouseout="this.style.borderColor='#ddd'; this.style.color='#666'">
+                    Reject
+                </button>
+                <a href="{% url 'listings:privacy_policy' %}" style="color: #7BAF2E; text-decoration: none; padding: 12px 20px; 
+                          display: inline-flex; align-items: center; font-weight: 600; transition: color 0.3s;"
+                    onmouseover="this.style.color='#6b9929'" onmouseout="this.style.color='#7BAF2E'">
+                    <i class="bi bi-shield-check"></i> Privacy Policy
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Popup Backdrop -->
+    <div id="cookieBackdrop" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+         background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); z-index: 9999;"></div>
+
+    <style>
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(100px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            #cookieConsent {
+                bottom: 0 !important;
+                left: 0 !important;
+                transform: none !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                border-radius: 20px 20px 0 0 !important;
+            }
+        }
+    </style>
+
+    <script>
+        // Cookie Consent Functions
+        function showCookieConsent() {
+            const consent = localStorage.getItem('cookieConsent');
+            if (!consent) {
+                document.getElementById('cookieConsent').style.display = 'block';
+                document.getElementById('cookieBackdrop').style.display = 'block';
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.getElementById('cookieConsent').style.display = 'none';
+            document.getElementById('cookieBackdrop').style.display = 'none';
+        }
+
+        function rejectCookies() {
+            localStorage.setItem('cookieConsent', 'rejected');
+            document.getElementById('cookieConsent').style.display = 'none';
+            document.getElementById('cookieBackdrop').style.display = 'none';
+        }
+
+        // Show cookie consent on page load
+        window.addEventListener('load', function () {
+            setTimeout(showCookieConsent, 1000); // Show after 1 second
+        });
+    </script>
+
+    <!-- Registration Encouragement Popup (Only for non-logged-in users) -->
+    {% if not user.is_authenticated %}
+    <div id="registerPopup" style="display: none; position: fixed; bottom: 20px; right: 20px; 
+         background: linear-gradient(135deg, #9ACD32, #ADFF2F); color: white; border-radius: 20px; 
+         padding: 25px; max-width: 350px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 9998; 
+         animation: slideInRight 0.5s ease;">
+
+        <button onclick="closeRegisterPopup()" style="position: absolute; top: 10px; right: 15px; background: none; border: none; 
+                       color: white; font-size: 1.5rem; cursor: pointer; opacity: 0.8; transition: opacity 0.3s;"
+            onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'" aria-label="Close">
+            <i class="bi bi-x-circle-fill"></i>
+        </button>
+
+        <div style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 10px;">🐾</div>
+            <h4 style="font-weight: 700; margin-bottom: 10px; color: white;">Help Animals in Need!</h4>
+            <p style="font-size: 0.95rem; margin-bottom: 20px; opacity: 0.95;">
+                Register as an individual helper and connect with people who need animal rescue assistance in Faridabad.
+            </p>
+            <a href="{% url 'accounts:register' %}" style="display: inline-block; background: white; color: #7BAF2E; padding: 12px 30px; 
+                      border-radius: 25px; text-decoration: none; font-weight: 700; transition: all 0.3s;"
+                onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                <i class="bi bi-person-plus"></i> Join Now
+            </a>
+        </div>
+    </div>
+
+    <style>
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(400px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            #registerPopup {
+                bottom: 10px !important;
+                right: 10px !important;
+                left: 10px !important;
+                max-width: calc(100% - 20px) !important;
+            }
+        }
+    </style>
+
+    <script>
+        // Registration Popup Functions
+        function showRegisterPopup() {
+            const popupDismissed = localStorage.getItem('registerPopupDismissed');
+            const dismissTime = localStorage.getItem('registerPopupDismissTime');
+            const threeDays = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
+
+            // Show if never dismissed OR if 3 days have passed
+            if (!popupDismissed || (dismissTime && Date.now() - dismissTime > threeDays)) {
+                setTimeout(function () {
+                    document.getElementById('registerPopup').style.display = 'block';
+                }, 5000); // Show after 5 seconds
+            }
+        }
+
+        function closeRegisterPopup() {
+            document.getElementById('registerPopup').style.display = 'none';
+            localStorage.setItem('registerPopupDismissed', 'true');
+            localStorage.setItem('registerPopupDismissTime', Date.now());
+        }
+
+        // Show registration popup on page load (only if user is not logged in)
+        window.addEventListener('load', showRegisterPopup);
+    </script>
+    {% endif %}
+
+
 
     <!-- Custom JS -->
     {% block extra_js %}{% endblock %}

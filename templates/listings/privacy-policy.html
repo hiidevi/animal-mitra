@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Privacy Policy - Animal Mitra{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 60px 0;">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <!-- Header -->
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h1 style="font-size: 2.5rem; font-weight: 800; color: #7BAF2E;">
+                    <i class="bi bi-shield-check"></i> Privacy Policy
+                </h1>
+                <p style="color: #666; font-size: 1.1rem;">Last Updated: December 3, 2025</p>
+            </div>
+
+            <!-- Content -->
+            <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                
+                <h2 style="color: #7BAF2E; margin-top: 30px;">1. Introduction</h2>
+                <p>Welcome to Animal Mitra. We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains what information we collect, how we use it, and what rights you have in relation to it.</p>
+
+                <h2 style="color: #7BAF2E; margin-top: 30px;">2. Information We Collect</h2>
+                <p>We collect the following types of information:</p>
+                <ul>
+                    <li><strong>Personal Information:</strong> Name, email address, phone number, location</li>
+                    <li><strong>Profile Information:</strong> Information you provide when registering as a helper or NGO</li>
+                    <li><strong>Usage Data:</strong> How you interact with our website</li>
+                    <li><strong>Cookies:</strong> We use cookies to improve your experience (see Cookie Policy below)</li>
+                </ul>
+
+                <h2 style="color: #7BAF2E; margin-top: 30px;">3. How We Use Your Information</h2>
+                <p>We use your information to:</p>
+                <ul>
+                    <li>Connect people with animal rescue helpers</li>
+                    <li>Verify helper and NGO accounts</li>
+                    <li>Send important notifications</li>
+                    <li>Improve our services</li>
+                    <li>Comply with legal obligations</li>
+                </ul>
+
+                <h2 style="color: #7BAF2E; margin-top: 30px;">4. Data Sharing</h2>
+                <p>We DO NOT sell your personal information. We only share your information when:</p>
+                <ul>
+                    <li>You explicitly make it public (e.g., your helper profile)</li>
+                    <li>Required by law</li>
+                    <li>Necessary to provide our services</li>
+                </ul>
+
+                <h2 style="color: #7BAF2E; margin-top: 30px;">5. Your Rights</h2>
+                <p>You have the right to:</p>
+                <ul>
+                    <li><strong>Access:</strong> Request a copy of your data</li>
+                    <li><strong>Update:</strong> Correct your information</li>
+                    <li><strong>Delete:</strong> Request deletion of your account</li>
+                    <li><strong>Opt-out:</strong> Unsubscribe from emails</li>
+                </ul>
+
+                <h2 style="color: #7BAF2E; margin-top: 30px;">6. Cookie Policy</h2>
+                <p>We use cookies to:</p>
+                <ul>
+                    <li>Remember your preferences</li>
+                    <li>Keep you logged in</li>
+                    <li>Analyze website traffic</li>
+                </ul>
+                <p>You can control cookies through your browser settings or our cookie consent popup.</p>
+
+                <h2 style="color: #7BAF2E; margin-top: 30px;">7. Data Security</h2>
+                <p>We use industry-standard security measures to protect your data, including:</p>
+                <ul>
+                    <li>HTTPS encryption</li>
+                    <li>Secure password hashing</li>
+                    <li>Regular security audits</li>
+                </ul>
+
+                <h2 style="color: #7BAF2E; margin-top: 30px;">8. Children's Privacy</h2>
+                <p>Our services are not intended for children under 13. We do not knowingly collect information from children.</p>
+
+                <h2 style="color: #7BAF2E; margin-top: 30px;">9. Changes to This Policy</h2>
+                <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page.</p>
+
+                <h2 style="color: #7BAF2E; margin-top: 30px;">10. Contact Us</h2>
+                <p>If you have questions about this Privacy Policy, please contact us:</p>
+                <ul>
+                    <li><strong>Email:</strong> <a href="mailto:animalmitra.fd@gmail.com" style="color: #7BAF2E;">animalmitra.fd@gmail.com</a></li>
+                    <li><strong>Phone:</strong> +91 98765 43210</li>
+                    <li><strong>Location:</strong> Faridabad, Haryana, India</li>
+                </ul>
+
+                <!-- Back Button -->
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="{% url 'listings:home' %}" class="btn" style="background: #9ACD32; color: white; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600;">
+                        <i class="bi bi-arrow-left"></i> Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

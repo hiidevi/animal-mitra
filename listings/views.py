@@ -62,3 +62,7 @@ def search_view(request):
     # Will implement based on search requirements
     
     return render(request, 'listings/search.html', {'query': query})
+
+def privacy_policy(request):
+    """Privacy Policy page"""
+    return render(request, 'listings/privacy-policy.html')

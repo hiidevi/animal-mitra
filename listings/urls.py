@@ -9,4 +9,5 @@ app_name = 'listings'
 urlpatterns = [
     path('', views.home_view, name='home'),
     path('search/', views.search_view, name='search'),
+    path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
 ]
