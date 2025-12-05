@@ -1,9 +1,9 @@
 """
 Django settings for animalmitra project.
 """
-import dj_database_url
-from decouple import config
 from pathlib import Path
+from decouple import config
+import dj_database_url
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -78,7 +78,6 @@ DATABASES = {
         default=config('DATABASE_URL', default='sqlite:///db.sqlite3'),
         conn_max_age=600,
         conn_health_checks=True,
-        ssl_require=True,
     )
 }
 
