@@ -1,7 +1,8 @@
 """
 Django settings for animalmitra project.
 """
-
+import dj_database_url
+from decouple import config
 from pathlib import Path
 import os
 
@@ -70,12 +71,17 @@ TEMPLATES = [
 WSGI_APPLICATION = 'animalmitra.wsgi.application'
 
 # Database
+
+# DATABASES CONFIGURATION
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL', default='sqlite:///db.sqlite3'),
+        conn_max_age=600,
+        conn_health_checks=True,
+        ssl_require=True,
+    )
 }
+
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
