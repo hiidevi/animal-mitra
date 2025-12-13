@@ -133,16 +133,36 @@ LOGOUT_REDIRECT_URL = 'listings:home'
 
 from decouple import config
 
-# Email Configuration (SAFE - uses environment variables)
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')  # ← Reads from .env
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # ← Reads from .env
-DEFAULT_FROM_EMAIL = f'Animal Mitra <{EMAIL_HOST_USER}>'
+
+
+# ========== EMAIL CONFIGURATION (Gmail + Resend) ==========
+
+# Choose which email service to use
+EMAIL_SERVICE = config('EMAIL_SERVICE', default='gmail')
+
+if EMAIL_SERVICE == 'resend':
+    # Resend SMTP Configuration
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.resend.com'
+    EMAIL_PORT = 465
+    EMAIL_USE_SSL = True
+    EMAIL_USE_TLS = False
+    EMAIL_HOST_USER = 'resend'
+    EMAIL_HOST_PASSWORD = config('RESEND_API_KEY')
+    DEFAULT_FROM_EMAIL = config('RESEND_FROM_EMAIL', default='onboarding@resend.dev')
+    SERVER_EMAIL = DEFAULT_FROM_EMAIL
+else:
+    # Email Configuration (SAFE - uses environment variables)
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = config('EMAIL_HOST_USER')  # ← Reads from .env
+    EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # ← Reads from .env
+    DEFAULT_FROM_EMAIL = f'Animal Mitra <{EMAIL_HOST_USER}>'
+    SERVER_EMAIL = EMAIL_HOST_USER
+
 
 # Also update SECRET_KEY and DEBUG
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
-
