@@ -1,4 +1,14 @@
 """
+User and Profile Models for Animal Mitra
+Created by: Dev Panchal
+
+AI Assistance: ChatGPT helped me understand Django's AbstractBaseUser,
+model relationships, and signals. All code was reviewed and customized
+for Animal Mitra's specific requirements.
+"""
+
+
+"""
 Database models for users, individual helpers, and NGOs
 """
 from django.db import models

@@ -1,4 +1,13 @@
 """
+Custom Resend Email Backend for Django
+Created by: Dev Panchal
+
+AI Assistance: ChatGPT helped create this custom backend to solve
+Render's SMTP port restrictions. I researched Resend's API and
+tested the implementation independently.
+"""
+
+"""
 Custom email backend for Resend API
 Works on Render free tier (no SMTP ports needed)
 """

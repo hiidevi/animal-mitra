@@ -1,4 +1,13 @@
 """
+Authentication and Dashboard Views
+Created by: Dev Panchal
+
+AI Assistance: ChatGPT provided guidance on Django authentication
+patterns. All views were customized for dual user types and
+verification workflow based on my design decisions.
+"""
+
+"""
 Views for user authentication and registration
 """
 from django.shortcuts import render, redirect

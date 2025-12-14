@@ -1,4 +1,12 @@
 """
+Django Settings for Animal Mitra
+Created by: Dev Panchal
+
+AI Assistance: ChatGPT provided guidance on environment variable
+configuration, email backend setup, and deployment settings.
+"""
+
+"""
 Django settings for animalmitra project.
 """
 from pathlib import Path
