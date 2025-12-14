@@ -133,9 +133,10 @@ LOGOUT_REDIRECT_URL = 'listings:home'
 
 from decouple import config
 
-# ========== EMAIL CONFIGURATION ==========
+# ========== EMAIL CONFIGURATION (Gmail + Resend) ==========
 
-EMAIL_SERVICE = config('EMAIL_SERVICE', default='gmail')
+# Choose which email service to use
+EMAIL_SERVICE = config('EMAIL_SERVICE', default='resend')
 
 if EMAIL_SERVICE == 'resend':
     # Resend API Backend (works on Render free tier!)
