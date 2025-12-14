@@ -1,163 +1,53 @@
 # Animal Mitra - Connecting Animal Helpers in Faridabad
 
-#### Video Demo: [WILL ADD YOUTUBE URL AFTER RECORDING]
+#### Video Demo: [YOUTUBE_URL_AFTER_RECORDING]
 
-#### Live Demo: https://animalmitra.onrender.com
+#### Description:
 
-#### GitHub: [your-github-username]
+Animal Mitra is a web platform that connects animal lovers, individual volunteers, and animal welfare NGOs in Faridabad, India to help street animals in need of rescue, food, and medical care. The platform solves a critical coordination problem: when people encounter injured or hungry street animals, they don't know who to contact for help, and volunteers working independently lack visibility.
 
-#### edX Username: [your-edx-username]
+## Project Overview
 
-#### Location: Faridabad, India
+The platform features a searchable directory of verified animal helpers, listings of NGOs with 24/7 emergency services, a dual registration system for individuals and organizations, an admin verification workflow, and personalized user dashboards. Users can search helpers by location and animal type (dogs, cats, cows, birds), view contact information (phone, WhatsApp, Instagram), and reach out immediately during emergencies.
 
-#### Date: December 14, 2025
+## Technical Stack
 
----
+Animal Mitra is built with Django 5.0 (Python web framework), PostgreSQL for production database, Bootstrap 5 for responsive design, and deployed on Render's free tier. The application uses a custom user authentication system, environment-based configuration, and a custom email backend to handle deployment constraints.
 
-## Description
+## File Structure and Explanations
 
-Animal Mitra is a comprehensive web platform that connects animal lovers, individual volunteers, and animal welfare NGOs in Faridabad, India. The platform addresses the critical problem of coordinating help for street animals by creating a centralized directory of verified helpers and organizations.
+**animalmitra/settings.py** is the main Django configuration file containing all project settings including database configuration (SQLite for development, PostgreSQL for production via dj-database-url), email backend selection (Gmail SMTP for development, Resend HTTP API for production), security settings (SECRET_KEY, ALLOWED_HOSTS, CSRF protection), static files configuration with WhiteNoise, and installed apps. I used python-decouple to read sensitive values from environment variables, keeping secrets out of the codebase entirely.
 
-### The Problem
+**accounts/models.py** contains the core data models. The custom User model extends AbstractBaseUser to enable email-based authentication instead of Django's default username system. It includes a user_type field to differentiate between individuals and NGOs, and a status field for the verification workflow (pending/verified/rejected). I chose to create separate IndividualProfile and NGOProfile models with OneToOne relationships to User, rather than a single polymorphic model, because each user type has distinctly different required fields. IndividualProfile stores helper data like name, mobile number, location, animals they help, and social media links. NGOProfile stores organization-specific data like registration number, services offered, capacity, and 24/7 availability. This separation makes form validation clearer and the admin interface more intuitive.
 
-India has one of the world's largest populations of street animals - millions of dogs, cats, cows, and birds living on the streets without proper care. When citizens encounter injured, sick, or hungry animals, they often don't know who to contact for immediate help. Similarly, individual volunteers and NGOs working to help animals operate independently without visibility, making it difficult for people to find them during emergencies.
+**accounts/views.py** handles all authentication logic including registration, login, logout, and password reset. The register_view implements a dual registration system where users select their type (individual or NGO) and see different form fields accordingly. All new registrations are created with status='pending' to require admin verification before appearing in public listings. The dashboard views (individual_dashboard and ngo_dashboard) fetch user-specific data and display statistics like profile views and calls received. I implemented password reset using Django's built-in views but customized the email templates to match Animal Mitra's branding.
 
-### The Solution
+**animalmitra/email_backend.py** is a custom Django email backend that I created to solve a critical deployment issue. Render's free tier blocks SMTP ports (25, 465, 587), which broke the Gmail SMTP integration that worked perfectly locally. After researching alternatives, I implemented a custom backend using Resend's HTTP API instead of SMTP. This backend extends Django's BaseEmailBackend, converts EmailMessage objects to Resend API calls using HTTPS (port 443), and handles HTML/text emails, CC, BCC, and reply-to headers. This solution took several days to implement but permanently solved the email problem without requiring code changes in views since it maintains Django's standard send_mail() interface.
 
-Animal Mitra solves this coordination problem by providing:
-- A searchable directory of individual animal helpers filtered by location and animal type
-- A listing of verified NGOs with 24/7 emergency services
-- A dual registration system for volunteers and organizations
-- An admin verification workflow to ensure quality and prevent spam
-- Contact information (phone, WhatsApp, Instagram) for immediate communication
-- User dashboards showing impact metrics (profile views, calls received)
+**admin_panel/views.py** contains a custom admin verification interface. I chose to build a custom interface rather than using Django's built-in admin because it needed to be simple enough for non-technical admins and focused solely on the verification task. The admin_panel_view displays all pending users in a card format with user details and one-click verify/reject buttons. The verify and reject actions use AJAX for instant feedback without page reloads. Only verified users appear in public helper and NGO listings, ensuring quality and preventing spam.
 
----
+**listings/views.py** implements the public-facing pages. The helpers_list and ngos_list views query only verified profiles from the database and pass them to templates. I implemented search and filtering using client-side JavaScript rather than server-side because the dataset is small (expected under 100 helpers), providing instant results without additional server requests and reducing hosting costs.
 
-## Key Features
+**templates/** directory contains all HTML templates. base.html is the master template with navbar, messages display, and footer, from which all other templates extend. The registration template (accounts/register.html) uses JavaScript to toggle between individual and NGO form fields based on user selection. Dashboard templates (dashboard/individual.html and dashboard/ngo.html) are customized for each user type with different statistics and information displays. All templates use Django's template language for server-side rendering, Jinja2-style syntax for variables and loops, and Bootstrap 5 classes for responsive design.
 
-### 1. Helper Directory
-Users can browse individual volunteers who dedicate their time to helping street animals. Each helper profile includes:
-- Full name and specific location (Faridabad sectors)
-- Types of animals they help (dogs, cats, cows, birds)
-- Bio describing their experience and availability
-- Contact information (mobile, WhatsApp, Instagram)
-- Statistics (profile views, calls received)
-- Search functionality by name or location
-- Filter by animal type for quick finding
+**static/images/** contains the project's visual assets including the logo, various favicon sizes for different devices and browsers, Open Graph image for social media sharing, and Twitter card image. These static files are served via WhiteNoise in production.
 
-### 2. NGO Listings
-For emergency situations requiring professional veterinary care or rescue services, the platform lists registered animal welfare NGOs with:
-- Organization name and registration details
-- 24/7 availability status with visual badges
-- Comprehensive list of services (emergency rescue, veterinary care, shelter, sterilization, adoption)
-- Operating hours and capacity information
-- Verified status badges for authenticity
-- Multiple contact methods for emergencies
-- Detailed descriptions of facilities and expertise
+## Key Design Decisions
 
-### 3. Dual User Registration System
-The platform supports two distinct user types with different registration flows:
+The most significant architectural decision was implementing a custom User model extending AbstractBaseUser. This was necessary because I needed email authentication (no username), a user_type field to differentiate individuals from NGOs, and a status field for the verification workflow. While this added complexity initially, it provided the flexibility needed for the dual registration system and future enhancements.
 
-**Individual Helpers:**
-- Register with name, email, mobile number
-- Select location (specific Faridabad sectors)
-- Choose animals they help (multiple selection)
-- Add bio and social media links
-- Receive personalized dashboard showing profile views and contact statistics
+I debated whether to use separate profile models (IndividualProfile and NGOProfile) or a single polymorphic profile with nullable fields. I chose separate models because it makes field requirements explicit - the registration form can enforce that individuals provide a mobile number while NGOs provide a registration number. This also simplifies form validation and creates a clearer admin interface.
 
-**NGOs (Non-Governmental Organizations):**
-- Register with organization name and registration number
-- Provide establishment year and total capacity
-- Mark 24/7 emergency availability
-- Select multiple services offered
-- Add operating hours and detailed address
-- Get dedicated dashboard with organizational metrics
+For the email system, the custom backend solution was born out of necessity when Render's port restrictions broke the standard SMTP approach. While it took significant time to implement, it taught me about Django's email backend architecture and created a more robust, platform-independent solution. The same codebase now works seamlessly in development (using Gmail) and production (using Resend's API) by simply changing an environment variable.
 
-### 4. Admin Verification System
-To ensure quality, safety, and prevent spam or fake listings:
-- All new registrations receive "Pending" status
-- Custom admin panel shows all pending users in one view
-- Admins can review profile details, contact information
-- One-click "Verify" or "Reject" actions
-- Only verified users appear in public helper/NGO listings
-- Verified badge displays prominently on profiles
-- Email notifications for status changes (implemented via Django signals)
+The verification workflow with three status states (pending/verified/rejected) was designed for safety and quality. Auto-approving all registrations would risk spam and fake profiles. Manual verification ensures that only genuine helpers and organizations appear in public listings, building user trust and maintaining platform quality.
 
-### 5. User Dashboards
-Each user type receives a customized dashboard showing relevant metrics:
+## AI Usage Acknowledgment
 
-**Individual Dashboard:**
-- Total profile views (how many people viewed their profile)
-- Total calls received (engagement metric)
-- Time active on platform (account age)
-- Complete profile information with edit capability
-- Verification status badge
+I used ChatGPT as a learning assistant throughout this project. It helped me understand Django concepts like AbstractBaseUser and signals, suggested the custom email backend approach when debugging the Render deployment issue, and provided code templates that I modified for Animal Mitra's specific needs. However, all design decisions, feature choices, code understanding, and problem-solving were my own. I can explain every part of the codebase and justify every technical choice made. The AI was a tutor, not the developer.
 
-**NGO Dashboard:**
-- Profile views counter
-- Emergency calls received
-- Total capacity information
-- Service statistics
-- Verification status
+## Future Plans
 
-### 6. Responsive Mobile-First Design
-Recognizing that most Indian internet users browse on smartphones:
-- Fully responsive design using Bootstrap 5 grid system
-- Mobile-optimized cards and navigation
-- Touch-friendly buttons (minimum 44px height)
-- Collapsible navbar for mobile
-- Optimized images and fast loading
-- Tested on iOS and Android devices
+If I continue this project, I plan to add geolocation-based helper search, real-time chat between users and helpers, a success stories section with rescue photos, volunteer scheduling calendar, mobile applications for iOS and Android, multi-language support (Hindi and regional languages), donation integration for NGOs, and expansion to other Indian cities. The modular Django app structure makes these enhancements straightforward to implement.
 
----
-
-## Technical Implementation
-
-### Technology Stack
-
-**Backend Framework:**
-- Django 5.0.1 (Python web framework)
-- Django ORM for database operations
-- Django authentication system (customized)
-- Django admin interface (customized)
-
-**Database:**
-- SQLite for local development (zero configuration)
-- PostgreSQL for production on Render
-- Database switching via environment variables
-
-**Frontend:**
-- Bootstrap 5.3 (responsive CSS framework)
-- Bootstrap Icons library
-- Custom CSS for brand colors (#9ACD32 green theme)
-- Vanilla JavaScript (no heavy frameworks)
-
-**Deployment & Infrastructure:**
-- Render web service (free tier)
-- PostgreSQL database on Render
-- Gunicorn WSGI server
-- WhiteNoise for static file serving
-- Environment variables via python-decouple
-
-**Email Service:**
-- Gmail SMTP for development
-- Resend HTTP API for production
-- Custom Django email backend to bypass SMTP port restrictions
-
----
-
-## Project Architecture
-
-### Custom User Model
-
-One of the most important design decisions was implementing a custom User model extending Django's AbstractBaseUser. This provides:
-
-**Why Custom User Model?**
-- Email-based authentication instead of username
-- Additional fields: user_type (individual/ngo), status (pending/verified/rejected)
-- Flexible for future enhancements
-- Complete control over authentication logic
-
-**Implementation:**
-
+This project represents over 100 hours of learning, development, testing, and deployment. It addresses a real problem in my community and has the potential to help thousands of street animals by connecting people who care with those who can help.
