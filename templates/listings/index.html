@@ -11,7 +11,7 @@
         --dark-green: #7BAF2E;
         --accent-yellow: #ADFF2F;
     }
-    
+
     /* Hero Section */
     .hero-section {
         background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--primary-green) 100%);
@@ -22,7 +22,7 @@
         display: flex;
         align-items: center;
     }
-    
+
     .hero-section::before {
         content: '';
         position: absolute;
@@ -33,21 +33,21 @@
         background: white;
         border-radius: 50% 50% 0 0;
     }
-    
+
     .hero-content {
         position: relative;
         z-index: 2;
     }
-    
+
     .hero-main-text {
         font-size: 5rem;
         font-weight: 800;
         color: white;
         margin-bottom: 1rem;
-        text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
         animation: fadeInUp 1s ease-out;
     }
-    
+
     .hero-subtitle-big {
         font-size: 2.5rem;
         font-weight: 600;
@@ -55,7 +55,7 @@
         margin-bottom: 1rem;
         animation: fadeInUp 1.2s ease-out;
     }
-    
+
     .hero-description {
         font-size: 1.4rem;
         font-weight: 400;
@@ -63,39 +63,40 @@
         margin-bottom: 2.5rem;
         animation: fadeInUp 1.4s ease-out;
     }
-    
+
     @keyframes fadeInUp {
         from {
             opacity: 0;
             transform: translateY(30px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
         }
     }
-    
+
     .search-container {
         background: white;
         border-radius: 50px;
         padding: 10px;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
         max-width: 800px;
         margin: 2rem auto;
         animation: fadeInUp 1.6s ease-out;
     }
-    
+
     .search-input {
         border: none;
         padding: 1.2rem 1.8rem;
         width: 100%;
         font-size: 1.2rem;
     }
-    
+
     .search-input:focus {
         outline: none;
     }
-    
+
     .search-btn {
         background: var(--primary-green);
         color: white;
@@ -106,18 +107,18 @@
         font-size: 1.1rem;
         transition: all 0.3s;
     }
-    
+
     .search-btn:hover {
         background: var(--dark-green);
         transform: scale(1.05);
     }
-    
+
     .filter-section {
         margin: 3rem 0;
         text-align: center;
         animation: fadeInUp 1.8s ease-out;
     }
-    
+
     .filter-btn {
         background: white;
         border: 2px solid var(--primary-green);
@@ -130,19 +131,20 @@
         transition: all 0.3s;
         cursor: pointer;
     }
-    
-    .filter-btn:hover, .filter-btn.active {
+
+    .filter-btn:hover,
+    .filter-btn.active {
         background: var(--primary-green);
         color: white;
         transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
-    
+
     .about-section {
         padding: 80px 0;
         background: #f8f9fa;
     }
-    
+
     .section-title {
         font-size: 3rem;
         font-weight: 700;
@@ -150,7 +152,7 @@
         margin-bottom: 1.5rem;
         text-align: center;
     }
-    
+
     .about-text {
         font-size: 1.2rem;
         line-height: 1.9;
@@ -159,33 +161,33 @@
         max-width: 900px;
         margin: 0 auto;
     }
-    
+
     .ngo-section {
         padding: 80px 0;
     }
-    
+
     .ngo-card {
         background: white;
         border-radius: 20px;
         padding: 2.5rem;
         margin-bottom: 2rem;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         transition: all 0.3s;
         border-left: 6px solid var(--primary-green);
     }
-    
+
     .ngo-card:hover {
         transform: translateY(-8px);
-        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
     }
-    
+
     .ngo-name {
         font-size: 1.6rem;
         font-weight: 700;
         color: #333;
         margin-bottom: 0.5rem;
     }
-    
+
     .verified-badge {
         background: var(--primary-green);
         color: white;
@@ -195,23 +197,23 @@
         margin-left: 0.8rem;
         font-weight: 600;
     }
-    
+
     .ngo-phone {
         font-size: 1.3rem;
         color: var(--dark-green);
         font-weight: 600;
         margin: 1.2rem 0;
     }
-    
+
     .ngo-phone i {
         color: var(--primary-green);
         margin-right: 0.5rem;
     }
-    
+
     .contact-icons {
         margin: 1.5rem 0;
     }
-    
+
     .contact-icon {
         display: inline-block;
         width: 50px;
@@ -225,34 +227,34 @@
         transition: all 0.3s;
         text-decoration: none;
     }
-    
+
     .contact-icon.whatsapp {
         background: #25D366;
     }
-    
+
     .contact-icon.instagram {
         background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     }
-    
+
     .contact-icon.telegram {
         background: #0088cc;
     }
-    
+
     .contact-icon.phone {
         background: var(--primary-green);
     }
-    
+
     .contact-icon:hover {
         transform: scale(1.15) rotate(5deg);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
-    
+
     .ngo-details {
         margin-top: 1.5rem;
         padding-top: 1.5rem;
         border-top: 1px solid #eee;
     }
-    
+
     .detail-item {
         margin: 1rem 0;
         color: #666;
@@ -260,7 +262,7 @@
         display: flex;
         align-items: flex-start;
     }
-    
+
     .detail-item i {
         color: var(--primary-green);
         width: 30px;
@@ -268,26 +270,26 @@
         margin-right: 0.5rem;
         flex-shrink: 0;
     }
-    
+
     .location-link {
         color: var(--dark-green);
         text-decoration: none;
         transition: all 0.3s;
         font-weight: 500;
     }
-    
+
     .location-link:hover {
         color: var(--primary-green);
         text-decoration: underline;
     }
-    
+
     .animal-tags {
         margin: 0.5rem 0;
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
     }
-    
+
     .animal-tag {
         display: inline-block;
         background: var(--light-green);
@@ -297,20 +299,20 @@
         font-size: 0.95rem;
         font-weight: 600;
     }
-    
+
     .footer {
         background: #333;
         color: white;
         padding: 3rem 0 1.5rem;
     }
-    
+
     .footer-title {
         color: var(--primary-green);
         font-weight: 700;
         margin-bottom: 1rem;
         font-size: 1.3rem;
     }
-    
+
     .footer-link {
         color: #ddd;
         text-decoration: none;
@@ -318,38 +320,38 @@
         margin: 0.5rem 0;
         transition: color 0.3s;
     }
-    
+
     .footer-link:hover {
         color: var(--primary-green);
     }
-    
+
     @media (max-width: 768px) {
         .hero-main-text {
             font-size: 3rem;
         }
-        
+
         .hero-subtitle-big {
             font-size: 1.8rem;
         }
-        
+
         .hero-description {
             font-size: 1.1rem;
         }
-        
+
         .search-container {
             padding: 5px;
         }
-        
+
         .search-input {
             padding: 1rem 1.2rem;
             font-size: 1rem;
         }
-        
+
         .filter-btn {
             padding: 0.7rem 1.5rem;
             font-size: 1rem;
         }
-        
+
         .section-title {
             font-size: 2.2rem;
         }
@@ -365,26 +367,33 @@
             <h1 class="hero-main-text">Need Help?</h1>
             <h2 class="hero-subtitle-big">You're at the Right Place! 🐾</h2>
             <p class="hero-description">Connect with NGOs, volunteers, and animal welfare organizations in Faridabad</p>
-            
+
             <!-- Search Bar -->
-            <div class="search-container">
+            <!-- Search Bar -->
+
+            <form method="GET" action="#" class="search-container">
                 <div class="row g-0 align-items-center">
-                    <div class="col-md-8">
-                        <input type="text" class="search-input" id="searchInput" placeholder="Search by location, animal type, or name...">
+                     <div class="col-md-8">
+                        <input type="text" class="search-input" name="search" placeholder="Search by location, animal type, or name..." required>
                     </div>
                     <div class="col-md-4">
-                        <button class="search-btn w-100" onclick="searchListings()"><i class="bi bi-search"></i> Search</button>
-                    </div>
+                        <button type="submit" class="search-btn w-100"><i class="bi bi-search"></i> Search</button>
+                     </div>
                 </div>
-            </div>
-            
+            </form>
+
+
+
             <!-- Filter Buttons -->
             <div class="filter-section">
                 <button class="filter-btn active" data-filter="all" onclick="filterListings('all')">All Animals</button>
-                <button class="filter-btn" data-filter="dogs" onclick="filterListings('dogs')"><i class="bi bi-heart-fill"></i> Dogs</button>
+                <button class="filter-btn" data-filter="dogs" onclick="filterListings('dogs')"><i
+                        class="bi bi-heart-fill"></i> Dogs</button>
                 <button class="filter-btn" data-filter="cows" onclick="filterListings('cows')">🐄 Cows</button>
-                <button class="filter-btn" data-filter="birds" onclick="filterListings('birds')"><i class="bi bi-twitter"></i> Birds</button>
-                <button class="filter-btn" data-filter="cats" onclick="filterListings('cats')"><i class="bi bi-heart"></i> Cats</button>
+                <button class="filter-btn" data-filter="birds" onclick="filterListings('birds')"><i
+                        class="bi bi-twitter"></i> Birds</button>
+                <button class="filter-btn" data-filter="cats" onclick="filterListings('cats')"><i
+                        class="bi bi-heart"></i> Cats</button>
             </div>
         </div>
     </div>
@@ -394,22 +403,23 @@
 <!-- About Us Section -->
 <section id="about" class="py-5" style="background: linear-gradient(180deg, #f8f9fa 0%, white 100%);">
     <div class="container">
-        
+
         <!-- Main Hero Message -->
         <div class="text-center mb-5">
             <h2 class="display-4" style="font-weight: 800; color: #7BAF2E; margin-bottom: 20px;">
                 🐾 About Animal Mitra
             </h2>
-            <div style="max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); border-left: 5px solid #9ACD32;">
+            <div
+                style="max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); border-left: 5px solid #9ACD32;">
                 <h3 style="color: #7BAF2E; font-weight: 700; margin-bottom: 20px;">We Don't Rescue - We CONNECT</h3>
                 <p style="font-size: 1.1rem; color: #666; line-height: 1.8;">
-                    Animal Mitra is <strong>NOT a rescue organization</strong>. We are Faridabad's trusted 
-                    <strong style="color: #7BAF2E;">information directory</strong> that connects people who need 
-                    help for animals in distress with those who CAN help - whether you're an NGO, individual helper, 
+                    Animal Mitra is <strong>NOT a rescue organization</strong>. We are Faridabad's trusted
+                    <strong style="color: #7BAF2E;">information directory</strong> that connects people who need
+                    help for animals in distress with those who CAN help - whether you're an NGO, individual helper,
                     Instagram animal lover, or just someone who cares.
                 </p>
                 <p style="font-size: 1rem; color: #888; margin-top: 15px; font-style: italic;">
-                    <i class="bi bi-info-circle-fill" style="color: #9ACD32;"></i> 
+                    <i class="bi bi-info-circle-fill" style="color: #9ACD32;"></i>
                     We share information. You make the difference.
                 </p>
             </div>
@@ -422,45 +432,52 @@
             </h3>
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="text-center p-4" style="background: white; border-radius: 15px; height: 100%; transition: all 0.3s; box-shadow: 0 3px 10px rgba(0,0,0,0.1);"
-                         onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 10px 30px rgba(154, 205, 50, 0.3)'"
-                         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(0,0,0,0.1)'">
-                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #9ACD32, #ADFF2F); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2.5rem;">
+                    <div class="text-center p-4"
+                        style="background: white; border-radius: 15px; height: 100%; transition: all 0.3s; box-shadow: 0 3px 10px rgba(0,0,0,0.1);"
+                        onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 10px 30px rgba(154, 205, 50, 0.3)'"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(0,0,0,0.1)'">
+                        <div
+                            style="width: 80px; height: 80px; background: linear-gradient(135deg, #9ACD32, #ADFF2F); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2.5rem;">
                             1️⃣
                         </div>
                         <h5 style="color: #7BAF2E; font-weight: 700; margin-bottom: 15px;">Register on Platform</h5>
                         <p style="color: #666; line-height: 1.6;">
-                            Anyone can register - NGOs, individuals, Instagram animal helpers, veterinarians, or simply animal lovers. 
+                            Anyone can register - NGOs, individuals, Instagram animal helpers, veterinarians, or simply
+                            animal lovers.
                             <strong>No certification needed!</strong>
                         </p>
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <div class="text-center p-4" style="background: white; border-radius: 15px; height: 100%; transition: all 0.3s; box-shadow: 0 3px 10px rgba(0,0,0,0.1);"
-                         onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 10px 30px rgba(154, 205, 50, 0.3)'"
-                         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(0,0,0,0.1)'">
-                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #9ACD32, #ADFF2F); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2.5rem;">
+                    <div class="text-center p-4"
+                        style="background: white; border-radius: 15px; height: 100%; transition: all 0.3s; box-shadow: 0 3px 10px rgba(0,0,0,0.1);"
+                        onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 10px 30px rgba(154, 205, 50, 0.3)'"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(0,0,0,0.1)'">
+                        <div
+                            style="width: 80px; height: 80px; background: linear-gradient(135deg, #9ACD32, #ADFF2F); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2.5rem;">
                             2️⃣
                         </div>
                         <h5 style="color: #7BAF2E; font-weight: 700; margin-bottom: 15px;">People Find You</h5>
                         <p style="color: #666; line-height: 1.6;">
-                            When someone nearby needs help for an animal, they search our directory and find helpers 
+                            When someone nearby needs help for an animal, they search our directory and find helpers
                             in their location. They can call, WhatsApp, or message you directly.
                         </p>
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <div class="text-center p-4" style="background: white; border-radius: 15px; height: 100%; transition: all 0.3s; box-shadow: 0 3px 10px rgba(0,0,0,0.1);"
-                         onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 10px 30px rgba(154, 205, 50, 0.3)'"
-                         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(0,0,0,0.1)'">
-                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #9ACD32, #ADFF2F); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2.5rem;">
+                    <div class="text-center p-4"
+                        style="background: white; border-radius: 15px; height: 100%; transition: all 0.3s; box-shadow: 0 3px 10px rgba(0,0,0,0.1);"
+                        onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 10px 30px rgba(154, 205, 50, 0.3)'"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(0,0,0,0.1)'">
+                        <div
+                            style="width: 80px; height: 80px; background: linear-gradient(135deg, #9ACD32, #ADFF2F); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2.5rem;">
                             3️⃣
                         </div>
                         <h5 style="color: #7BAF2E; font-weight: 700; margin-bottom: 15px;">You Decide to Help</h5>
                         <p style="color: #666; line-height: 1.6;">
-                            <strong>It's YOUR choice!</strong> No pressure, no obligation. Help when you can, 
+                            <strong>It's YOUR choice!</strong> No pressure, no obligation. Help when you can,
                             in the way you can - rescue, financial support, shelter, or just advice.
                         </p>
                     </div>
@@ -473,16 +490,17 @@
             <h3 class="text-center mb-4" style="color: #7BAF2E; font-weight: 700;">
                 <i class="bi bi-people-fill"></i> Who Can Register?
             </h3>
-            
+
             <div id="whoCanRegisterCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-                <div class="carousel-inner" style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
-                    
+                <div class="carousel-inner"
+                    style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+
                     <div class="carousel-item active">
                         <div class="text-center">
                             <div style="font-size: 4rem; margin-bottom: 20px;">🏢</div>
                             <h4 style="color: #7BAF2E; font-weight: 700;">NGOs & Organizations</h4>
                             <p style="color: #666; font-size: 1.1rem; margin-top: 15px;">
-                                Registered animal welfare organizations, shelters, and rescue groups. 
+                                Registered animal welfare organizations, shelters, and rescue groups.
                                 Increase your reach and connect with more people who need your help.
                             </p>
                         </div>
@@ -493,7 +511,7 @@
                             <div style="font-size: 4rem; margin-bottom: 20px;">❤️</div>
                             <h4 style="color: #7BAF2E; font-weight: 700;">Individual Animal Lovers</h4>
                             <p style="color: #666; font-size: 1.1rem; margin-top: 15px;">
-                                You love animals and want to help? That's ALL you need! 
+                                You love animals and want to help? That's ALL you need!
                                 No certification, no NGO connection required. Just a caring heart.
                             </p>
                         </div>
@@ -504,7 +522,7 @@
                             <div style="font-size: 4rem; margin-bottom: 20px;">📱</div>
                             <h4 style="color: #7BAF2E; font-weight: 700;">Social Media Helpers</h4>
                             <p style="color: #666; font-size: 1.1rem; margin-top: 15px;">
-                                Run an Instagram page for street dogs? Post animal rescue stories? 
+                                Run an Instagram page for street dogs? Post animal rescue stories?
                                 You're making a difference! Register and expand your impact.
                             </p>
                         </div>
@@ -515,7 +533,7 @@
                             <div style="font-size: 4rem; margin-bottom: 20px;">🏥</div>
                             <h4 style="color: #7BAF2E; font-weight: 700;">Veterinarians & Medical Help</h4>
                             <p style="color: #666; font-size: 1.1rem; margin-top: 15px;">
-                                Vets who provide emergency services, clinics offering discounts for strays, 
+                                Vets who provide emergency services, clinics offering discounts for strays,
                                 or medical professionals who volunteer their time.
                             </p>
                         </div>
@@ -526,7 +544,7 @@
                             <div style="font-size: 4rem; margin-bottom: 20px;">🏠</div>
                             <h4 style="color: #7BAF2E; font-weight: 700;">Foster & Shelter Providers</h4>
                             <p style="color: #666; font-size: 1.1rem; margin-top: 15px;">
-                                Have space to temporarily foster animals? Run a small shelter? 
+                                Have space to temporarily foster animals? Run a small shelter?
                                 Help connect injured animals with temporary safe spaces.
                             </p>
                         </div>
@@ -537,19 +555,23 @@
                             <div style="font-size: 4rem; margin-bottom: 20px;">🍖</div>
                             <h4 style="color: #7BAF2E; font-weight: 700;">Community Feeders</h4>
                             <p style="color: #666; font-size: 1.1rem; margin-top: 15px;">
-                                Feed street dogs in your colony? Take care of community cats? 
+                                Feed street dogs in your colony? Take care of community cats?
                                 You're a hero! Let others know you're there to help.
                             </p>
                         </div>
                     </div>
 
                 </div>
-                
-                <button class="carousel-control-prev" type="button" data-bs-target="#whoCanRegisterCarousel" data-bs-slide="prev" style="width: 50px;">
-                    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: #7BAF2E; border-radius: 50%; padding: 20px;"></span>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#whoCanRegisterCarousel"
+                    data-bs-slide="prev" style="width: 50px;">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"
+                        style="background-color: #7BAF2E; border-radius: 50%; padding: 20px;"></span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#whoCanRegisterCarousel" data-bs-slide="next" style="width: 50px;">
-                    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: #7BAF2E; border-radius: 50%; padding: 20px;"></span>
+                <button class="carousel-control-next" type="button" data-bs-target="#whoCanRegisterCarousel"
+                    data-bs-slide="next" style="width: 50px;">
+                    <span class="carousel-control-next-icon" aria-hidden="true"
+                        style="background-color: #7BAF2E; border-radius: 50%; padding: 20px;"></span>
                 </button>
             </div>
         </div>
@@ -559,10 +581,12 @@
             <h3 class="text-center mb-4" style="color: #7BAF2E; font-weight: 700;">
                 <i class="bi bi-heart-fill"></i> Different Ways to Help
             </h3>
-            
-            <div id="waysToHelpCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2500">
-                <div class="carousel-inner" style="background: linear-gradient(135deg, #9ACD32, #ADFF2F); border-radius: 20px; padding: 50px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); color: white;">
-                    
+
+            <div id="waysToHelpCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
+                data-bs-interval="2500">
+                <div class="carousel-inner"
+                    style="background: linear-gradient(135deg, #9ACD32, #ADFF2F); border-radius: 20px; padding: 50px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); color: white;">
+
                     <div class="carousel-item active">
                         <div class="text-center">
                             <div style="font-size: 5rem; margin-bottom: 20px;">🚑</div>
@@ -644,16 +668,24 @@
                     </div>
 
                 </div>
-                
+
                 <div class="carousel-indicators" style="bottom: -40px;">
-                    <button type="button" data-bs-target="#waysToHelpCarousel" data-bs-slide-to="0" class="active" style="background-color: #7BAF2E;"></button>
-                    <button type="button" data-bs-target="#waysToHelpCarousel" data-bs-slide-to="1" style="background-color: #7BAF2E;"></button>
-                    <button type="button" data-bs-target="#waysToHelpCarousel" data-bs-slide-to="2" style="background-color: #7BAF2E;"></button>
-                    <button type="button" data-bs-target="#waysToHelpCarousel" data-bs-slide-to="3" style="background-color: #7BAF2E;"></button>
-                    <button type="button" data-bs-target="#waysToHelpCarousel" data-bs-slide-to="4" style="background-color: #7BAF2E;"></button>
-                    <button type="button" data-bs-target="#waysToHelpCarousel" data-bs-slide-to="5" style="background-color: #7BAF2E;"></button>
-                    <button type="button" data-bs-target="#waysToHelpCarousel" data-bs-slide-to="6" style="background-color: #7BAF2E;"></button>
-                    <button type="button" data-bs-target="#waysToHelpCarousel" data-bs-slide-to="7" style="background-color: #7BAF2E;"></button>
+                    <button type="button" data-bs-target="#waysToHelpCarousel" data-bs-slide-to="0" class="active"
+                        style="background-color: #7BAF2E;"></button>
+                    <button type="button" data-bs-target="#waysToHelpCarousel" data-bs-slide-to="1"
+                        style="background-color: #7BAF2E;"></button>
+                    <button type="button" data-bs-target="#waysToHelpCarousel" data-bs-slide-to="2"
+                        style="background-color: #7BAF2E;"></button>
+                    <button type="button" data-bs-target="#waysToHelpCarousel" data-bs-slide-to="3"
+                        style="background-color: #7BAF2E;"></button>
+                    <button type="button" data-bs-target="#waysToHelpCarousel" data-bs-slide-to="4"
+                        style="background-color: #7BAF2E;"></button>
+                    <button type="button" data-bs-target="#waysToHelpCarousel" data-bs-slide-to="5"
+                        style="background-color: #7BAF2E;"></button>
+                    <button type="button" data-bs-target="#waysToHelpCarousel" data-bs-slide-to="6"
+                        style="background-color: #7BAF2E;"></button>
+                    <button type="button" data-bs-target="#waysToHelpCarousel" data-bs-slide-to="7"
+                        style="background-color: #7BAF2E;"></button>
                 </div>
             </div>
         </div>
@@ -661,7 +693,8 @@
         <!-- Key Points (What We Are NOT) -->
         <div class="row g-4 mb-5">
             <div class="col-md-6">
-                <div style="background: #fff3cd; border-left: 5px solid #ffc107; padding: 30px; border-radius: 15px; height: 100%;">
+                <div
+                    style="background: #fff3cd; border-left: 5px solid #ffc107; padding: 30px; border-radius: 15px; height: 100%;">
                     <h5 style="color: #856404; font-weight: 700; margin-bottom: 15px;">
                         <i class="bi bi-exclamation-triangle-fill"></i> What We Are NOT
                     </h5>
@@ -675,7 +708,8 @@
             </div>
 
             <div class="col-md-6">
-                <div style="background: #d4edda; border-left: 5px solid #28a745; padding: 30px; border-radius: 15px; height: 100%;">
+                <div
+                    style="background: #d4edda; border-left: 5px solid #28a745; padding: 30px; border-radius: 15px; height: 100%;">
                     <h5 style="color: #155724; font-weight: 700; margin-bottom: 15px;">
                         <i class="bi bi-check-circle-fill"></i> What We ARE
                     </h5>
@@ -690,16 +724,19 @@
         </div>
 
         <!-- Call to Action -->
-        <div class="text-center" style="background: linear-gradient(135deg, #7BAF2E, #6b9929); padding: 50px; border-radius: 20px; color: white;">
+        <div class="text-center"
+            style="background: linear-gradient(135deg, #7BAF2E, #6b9929); padding: 50px; border-radius: 20px; color: white;">
             <h3 style="font-weight: 800; margin-bottom: 20px;">Ready to Make a Difference?</h3>
             <p style="font-size: 1.1rem; margin-bottom: 30px; opacity: 0.95;">
                 Join our community of animal lovers. No commitment, no pressure - just be there when you can.
             </p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <a href="{% url 'accounts:register' %}" class="btn btn-light btn-lg" style="padding: 15px 40px; border-radius: 30px; font-weight: 700; color: #7BAF2E;">
+                <a href="{% url 'accounts:register' %}" class="btn btn-light btn-lg"
+                    style="padding: 15px 40px; border-radius: 30px; font-weight: 700; color: #7BAF2E;">
                     <i class="bi bi-person-plus"></i> Register as Helper
                 </a>
-                <a href="#ngos" class="btn btn-outline-light btn-lg" style="padding: 15px 40px; border-radius: 30px; font-weight: 700; border: 2px solid white;">
+                <a href="#ngos" class="btn btn-outline-light btn-lg"
+                    style="padding: 15px 40px; border-radius: 30px; font-weight: 700; border: 2px solid white;">
                     <i class="bi bi-search"></i> Find Help Now
                 </a>
             </div>
@@ -712,7 +749,7 @@
 <section class="ngo-section" id="ngos">
     <div class="container">
         <h2 class="section-title mb-5">Animal Rescue Organizations in Faridabad</h2>
-        
+
         {% if listings %}
         <div class="row" id="listingsContainer">
             {% for listing in listings %}
@@ -724,24 +761,27 @@
                         <span class="verified-badge"><i class="bi bi-patch-check-fill"></i> Verified</span>
                         {% endif %}
                     </div>
-                    
+
                     <div class="ngo-phone">
                         <i class="bi bi-telephone-fill"></i> {{ listing.phone }}
                     </div>
-                    
+
                     <div class="contact-icons">
                         {% if listing.whatsapp %}
-                        <a href="https://wa.me/{{ listing.whatsapp|cut:'+' }}" class="contact-icon whatsapp" target="_blank" title="WhatsApp">
+                        <a href="https://wa.me/{{ listing.whatsapp|cut:'+' }}" class="contact-icon whatsapp"
+                            target="_blank" title="WhatsApp">
                             <i class="bi bi-whatsapp"></i>
                         </a>
                         {% endif %}
                         {% if listing.instagram %}
-                        <a href="https://instagram.com/{{ listing.instagram|cut:'@' }}" class="contact-icon instagram" target="_blank" title="Instagram">
+                        <a href="https://instagram.com/{{ listing.instagram|cut:'@' }}" class="contact-icon instagram"
+                            target="_blank" title="Instagram">
                             <i class="bi bi-instagram"></i>
                         </a>
                         {% endif %}
                         {% if listing.telegram %}
-                        <a href="https://t.me/{{ listing.telegram|cut:'@' }}" class="contact-icon telegram" target="_blank" title="Telegram">
+                        <a href="https://t.me/{{ listing.telegram|cut:'@' }}" class="contact-icon telegram"
+                            target="_blank" title="Telegram">
                             <i class="bi bi-telegram"></i>
                         </a>
                         {% endif %}
@@ -749,13 +789,14 @@
                             <i class="bi bi-telephone-fill"></i>
                         </a>
                     </div>
-                    
+
                     <div class="ngo-details">
                         <div class="detail-item">
                             <i class="bi bi-geo-alt-fill"></i>
                             <div>
                                 <strong>Location:</strong> {{ listing.location }}<br>
-                                <a href="https://www.google.com/maps/search/?api=1&query={{ listing.location|urlencode }}" target="_blank" class="location-link">
+                                <a href="https://www.google.com/maps/search/?api=1&query={{ listing.location|urlencode }}"
+                                    target="_blank" class="location-link">
                                     <i class="bi bi-map"></i> View on Map
                                 </a>
                             </div>
@@ -763,7 +804,7 @@
                         <div class="detail-item">
                             <i class="bi bi-heart-pulse-fill"></i>
                             <div>
-                                <strong>{% if listing.type == 'ngo' %}Services:{% else %}Animals Helped:{% endif %}</strong>
+                                <strong>{% if listing.type == 'ngo' %}Services:{% else %}Animals Helped:{% endif%}</strong>
                                 <div class="animal-tags">
                                     {% for animal in listing.animals %}
                                     <span class="animal-tag">{{ animal }}</span>
@@ -782,7 +823,8 @@
         </div>
         {% else %}
         <div class="text-center">
-            <p class="lead">No verified listings yet. Be the first to <a href="{% url 'accounts:register' %}">register</a>!</p>
+            <p class="lead">No verified listings yet. Be the first to <a
+                    href="{% url 'accounts:register' %}">register</a>!</p>
         </div>
         {% endif %}
     </div>
@@ -793,6 +835,176 @@
 
 {% block extra_js %}
 <script>
+    // ====================================
+    // AJAX LIVE SEARCH FUNCTIONALITY
+    // ====================================
+    
+    const searchForm = document.querySelector('.search-container');
+    const searchInput = searchForm.querySelector('input[name="search"]');
+    const listingsContainer = document.getElementById('listingsContainer');
+    const sectionTitle = document.querySelector('.section-title');
+    
+    // Prevent form submission, use AJAX instead
+    searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        performSearch();
+    });
+    
+    // AUTO-SEARCH WHILE TYPING - DISABLED (Option 1)
+    // Only searches when you click button or press Enter
+    
+    function performSearch() {
+        const query = searchInput.value.trim();
+        
+        // Scroll to results section smoothly
+        const ngosSection = document.getElementById('ngos');
+        if (ngosSection) {
+            ngosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Show loading state
+        listingsContainer.innerHTML = `
+            <div class="col-12 text-center py-5">
+                <div class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-3" style="font-size: 1.2rem; color: #666;">Searching...</p>
+            </div>
+        `;
+        
+        // Make AJAX request
+        fetch(`/api/search/?search=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                updateResults(data);
+            })
+            .catch(error => {
+                console.error('Search error:', error);
+                listingsContainer.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <p style="color: #dc3545; font-size: 1.2rem;">❌ Search failed. Please try again.</p>
+                    </div>
+                `;
+            });
+    }
+    
+    function updateResults(data) {
+        // Update title with count
+        if (data.query) {
+            sectionTitle.innerHTML = `Search Results for "<span style="color: #7BAF2E;">${data.query}</span>" <span style="font-size: 1.5rem; color: #666;">(${data.count} found)</span>`;
+        } else {
+            sectionTitle.textContent = 'Animal Rescue Organizations in Faridabad';
+        }
+        
+        // Clear container
+        listingsContainer.innerHTML = '';
+        
+        if (data.results.length === 0) {
+            // No results found
+            listingsContainer.innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">😔</div>
+                    <h3 style="color: #666; font-size: 1.8rem; margin-bottom: 1rem;">No helpers found</h3>
+                    <p style="color: #999; font-size: 1.1rem;">Try searching with different keywords or browse all helpers</p>
+                    <button class="btn btn-success btn-lg mt-3" onclick="clearSearch()" style="padding: 0.8rem 2rem; border-radius: 30px; background: #9ACD32; border: none; font-weight: 600;">
+                        <i class="bi bi-arrow-clockwise"></i> Show All Helpers
+                    </button>
+                </div>
+            `;
+            return;
+        }
+        
+        // Build listing cards
+        data.results.forEach(listing => {
+            const card = createListingCard(listing);
+            listingsContainer.innerHTML += card;
+        });
+    }
+    
+    function createListingCard(listing) {
+        // Build animal tags
+        const animals = listing.animals.map(animal => 
+            `<span class="animal-tag">${animal}</span>`
+        ).join('');
+        
+        // Build contact buttons
+        const whatsappBtn = listing.whatsapp ? 
+            `<a href="https://wa.me/${listing.whatsapp.replace(/[\+\s]/g, '')}" class="contact-icon whatsapp" target="_blank" title="WhatsApp">
+                <i class="bi bi-whatsapp"></i>
+            </a>` : '';
+        
+        const instagramBtn = listing.instagram ? 
+            `<a href="https://instagram.com/${listing.instagram.replace(/@/g, '')}" class="contact-icon instagram" target="_blank" title="Instagram">
+                <i class="bi bi-instagram"></i>
+            </a>` : '';
+        
+        const telegramBtn = listing.telegram ? 
+            `<a href="https://t.me/${listing.telegram.replace(/@/g, '')}" class="contact-icon telegram" target="_blank" title="Telegram">
+                <i class="bi bi-telegram"></i>
+            </a>` : '';
+        
+        const verifiedBadge = listing.verified ? 
+            '<span class="verified-badge"><i class="bi bi-patch-check-fill"></i> Verified</span>' : '';
+        
+        return `
+            <div class="col-lg-6 listing-item" data-animals="${listing.animals.join(',').toLowerCase()}">
+                <div class="ngo-card">
+                    <div class="d-flex align-items-center flex-wrap mb-3">
+                        <h3 class="ngo-name mb-0">${listing.name}</h3>
+                        ${verifiedBadge}
+                    </div>
+                    
+                    <div class="ngo-phone">
+                        <i class="bi bi-telephone-fill"></i> ${listing.phone}
+                    </div>
+                    
+                    <div class="contact-icons">
+                        ${whatsappBtn}
+                        ${instagramBtn}
+                        ${telegramBtn}
+                        <a href="tel:${listing.phone}" class="contact-icon phone" title="Call Now">
+                            <i class="bi bi-telephone-fill"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="ngo-details">
+                        <div class="detail-item">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <div>
+                                <strong>Location:</strong> ${listing.location}<br>
+                                <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(listing.location)}" target="_blank" class="location-link">
+                                    <i class="bi bi-map"></i> View on Map
+                                </a>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="bi bi-heart-pulse-fill"></i>
+                            <div>
+                                <strong>${listing.type === 'ngo' ? 'Services:' : 'Animals Helped:'}</strong>
+                                <div class="animal-tags">
+                                    ${animals}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="bi bi-clock-fill"></i>
+                            <div><strong>Timing:</strong> ${listing.timing}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    function clearSearch() {
+        searchInput.value = '';
+        performSearch();
+    }
+    
+    // ====================================
+    // FILTER BUTTONS (EXISTING FUNCTIONALITY)
+    // ====================================
+    
     function filterListings(animalType) {
         const filterBtns = document.querySelectorAll('.filter-btn');
         const listingItems = document.querySelectorAll('.listing-item');
@@ -800,6 +1012,12 @@
         // Update active button
         filterBtns.forEach(btn => btn.classList.remove('active'));
         event.target.classList.add('active');
+        
+        // Scroll to results
+        const ngosSection = document.getElementById('ngos');
+        if (ngosSection) {
+            ngosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
         
         // Filter listings
         listingItems.forEach(item => {
@@ -811,19 +1029,20 @@
                 item.style.display = 'none';
             }
         });
-    }
-    
-    function searchListings() {
-        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-        const listingItems = document.querySelectorAll('.listing-item');
         
-        listingItems.forEach(item => {
-            const text = item.textContent.toLowerCase();
-            item.style.display = text.includes(searchTerm) ? 'block' : 'none';
-        });
+        // Update title
+        if (animalType === 'all') {
+            sectionTitle.textContent = 'Animal Rescue Organizations in Faridabad';
+        } else {
+            const animalName = animalType.charAt(0).toUpperCase() + animalType.slice(1);
+            sectionTitle.textContent = `${animalName} Helpers in Faridabad`;
+        }
     }
     
-    // Smooth scrolling
+    // ====================================
+    // SMOOTH SCROLLING FOR ANCHOR LINKS
+    // ====================================
+    
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -836,5 +1055,16 @@
             }
         });
     });
+    
+    // ====================================
+    // LOAD ALL RESULTS ON PAGE LOAD
+    // ====================================
+    
+    // If page loads with no results, fetch all
+    if (listingsContainer && listingsContainer.children.length === 0) {
+        performSearch();
+    }
 </script>
-{% endblock %} 
+{% endblock %}
+
+

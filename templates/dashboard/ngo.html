@@ -64,7 +64,7 @@
     <div style="padding: 1rem 0;">
       <strong style="color: #666;">Services:</strong>
       <div style="margin-top: 0.5rem;">
-        {% for service in profile.get_services_list|default:list %}
+        {% for service in services_list %}
           <span style="display: inline-block; background: #C8E66C; color: #7BAF2E; padding: 0.4rem 1rem; border-radius: 20px; margin: 0.3rem;">{{ service }}</span>
         {% empty %}
           <span style="color:#777">Not specified</span>
