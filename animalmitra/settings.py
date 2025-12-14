@@ -133,8 +133,6 @@ LOGOUT_REDIRECT_URL = 'listings:home'
 
 from decouple import config
 
-from decouple import config
-
 # ========== EMAIL CONFIGURATION ==========
 
 EMAIL_SERVICE = config('EMAIL_SERVICE', default='gmail')
